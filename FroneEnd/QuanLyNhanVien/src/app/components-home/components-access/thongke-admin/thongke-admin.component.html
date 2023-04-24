@@ -1,0 +1,32 @@
+<div id="main">
+ <div class="header">
+   <div class="header-body">
+     <div class="header__chart-left">
+       <fusioncharts
+         width="600"
+         height="400"
+         type="Pie3d"
+         [dataSource]="dataSource">
+       </fusioncharts>
+     </div>
+     <div class="header-chart-right">
+       <fusioncharts
+         width="600"
+         height="400"
+         type="Column3d"
+         [dataSource]="dataSourceLuong">
+       </fusioncharts>
+     </div>
+   </div>
+   <div class="main-body">
+     <div class="main__chart-left">
+       <fusioncharts
+         width="600"
+         height="400"
+         type="Column3d"
+         [dataSource]="dataSourceNhanVienThang">
+       </fusioncharts>
+     </div>
+   </div>
+ </div>
+</div>

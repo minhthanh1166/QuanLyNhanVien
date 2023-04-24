@@ -1,0 +1,299 @@
+<div class="card">
+  <div class="card-header">
+    <h2>Danh sách hình thức khen thưởng</h2>
+  </div>
+  <div class="card-body">
+    <div class="container mt-2 w-75" id="main-container">
+        <div class="d-flex">
+          <a
+            class="btn btn-outline-success mb-3 text-decoration-none"
+            id="add-btn-open-modal"
+            (click)="onOpenModalAdd('add')"
+            style="height: 36px;">
+            <i class="fa-solid fa-plus"></i>
+            Thêm
+          </a>
+
+          <a
+            class="btn btn-outline-secondary mb-3 ms-3 text-decoration-none"
+            href="/khenthuong"
+            style="height: 36px;">
+            <i class="fa-solid fa-retweet"></i>
+            Tải lại trang
+          </a>
+        </div>
+
+
+
+      <table class="table table-striped table-hover" style="margin: auto">
+        <thead class="mt-3 text-light" style="background: #1d1b31">
+        <tr>
+          <th>ID</th>
+          <th>Tên hình thức</th>
+          <th>Ghi chú</th>
+          <th>Hành động</th>
+        </tr>
+        </thead>
+
+        <tbody class="">
+        <tr
+          *ngFor="
+              let item of listHinhThucKhenThuong
+                | paginate
+                  : {
+                      id: 'dan-toc-p',
+                      itemsPerPage: 5,
+                      currentPage: p,
+                      totalItems: listHinhThucKhenThuong.length
+                    }
+            "
+        >
+          <td>{{ item.idHT }}</td>
+          <td>{{ item.tenHT }}</td>
+          <td>{{ item.ghiChu }}</td>
+          <td>
+            <div class="float-right btn-group btn-group-sm">
+              <a
+                class="btn btn-sm btn-warning tooltips"
+                data-placement="top"
+                data-toggle="tooltip"
+                data-original-title="Edit"
+                (click)="onOpenEditOrDeleteModal(item, 'edit')"
+              >
+                <i class="fa-solid fa-pen-to-square me-1"></i>
+              </a>
+              <a
+                class="btn btn-sm btn-danger tooltips"
+                data-placement="top"
+                data-toggle="tooltip"
+                data-original-title="Delete"
+                (click)="onOpenEditOrDeleteModal(item, 'delete')"
+              >
+                <i class="fa-solid fa-eraser me-1"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <nav class="mt-5 text-center w-100">
+        <pagination-controls
+          (pageChange)="p = $event"
+          id="dan-toc-p"
+          previousLabel=""
+          nextLabel=""
+        >
+        </pagination-controls>
+      </nav>
+    </div>
+
+    <!-- Modal Add-->
+    <div
+      class="modal fade"
+      id="addModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="addModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addModalLabel">Thêm mới</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              style="border: 0; border-radius: 25%; padding: 0 5px"
+            >
+              <span aria-hidden="true">X</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #addForm="ngForm" (ngSubmit)="onAdd(addForm)">
+              <div class="mb-3">
+                <label for="Input1Add" class="form-label">Tên hình thức </label>
+                <input
+                  type="text"
+                  ngModel
+                  name="tenHT"
+                  class="form-control"
+                  id="Input1Add"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="Input1Add1" class="form-label">Ghi chú </label>
+                <input
+                  type="text"
+                  ngModel
+                  name="ghiChu"
+                  class="form-control"
+                  id="Input1Add1"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  id="add-obj-form"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Đóng
+                </button>
+                <button
+                  [disabled]="addForm.invalid"
+                  type="submit"
+                  class="btn btn-success"
+                >
+                  Lưu
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Update-->
+    <div
+      class="modal fade"
+      id="updateModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="updateModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateModalLabel">Cập nhật</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              style="border: 0; border-radius: 25%; padding: 0 5px"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">X</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #editForm="ngForm">
+              <div class="mb-2">
+                <label for="Input0Edit" class="form-label">ID:</label>
+                <input
+                  type="hidden"
+                  ngModel="{{ editHinhThucKhenThuong.idHT }}"
+                  name="idHT"
+                  id="idEdit"
+                />
+                <input
+                  type="text"
+                  ngModel="{{ editHinhThucKhenThuong.idHT }}"
+                  disabled
+                  name="see-id"
+                  class="form-control"
+                  id="Input0Edit"
+                />
+              </div>
+              <div class="mb-2">
+                <label for="Input1Edit" class="form-label"
+                >Tên hình thức:</label
+                >
+                <input
+                  type="text"
+                  ngModel="{{ editHinhThucKhenThuong.tenHT }}"
+                  name="tenHT"
+                  class="form-control"
+                  id="Input1Edit"
+                />
+              </div>
+              <div class="mb-2">
+                <label for="Input12Edit" class="form-label">Ghi chú:</label>
+                <input
+                  type="text"
+                  ngModel="{{ editHinhThucKhenThuong.ghiChu }}"
+                  name="ghiChu"
+                  class="form-control"
+                  id="Input12Edit"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  id="edit-obj-btn-close"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Đóng
+                </button>
+                <button
+                  (click)="onUpdate(editForm.value)"
+                  type="submit"
+                  class="btn btn-warning"
+                >
+                  Lưu
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Delete-->
+    <div
+      class="modal fade"
+      id="deleteModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="deleteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Xoá thông tin</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              style="border: 0; border-radius: 25%; padding: 0 5px"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">X</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Bạn muốn xoá {{ deleteHinhThucKhenThuong.tenHT }} không?
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="delete-form-btn-no"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Không
+            </button>
+            <button
+              type="button"
+              (click)="onDelete(keyId)"
+              class="btn btn-danger"
+            >
+              Có
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="liveAlertPlaceholder"
+      class="w-25"
+      style="position: fixed; right: 30px; bottom: 16px"
+    ></div>
+  </div>
+</div>

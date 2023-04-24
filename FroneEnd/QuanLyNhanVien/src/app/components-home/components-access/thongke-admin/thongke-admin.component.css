@@ -1,0 +1,20 @@
+.main-body,
+.header-body {
+  display: flex;
+  justify-content: center;
+}
+.main__chart-left,
+.header__chart-left {
+  margin: 0 20px 20px 0;
+}
+
+.main__chart-left {
+  margin-bottom: 50px;
+}
+
+
+#main {
+  background: #e4e9f7;
+  width: 100%;
+  height: 100%;
+}

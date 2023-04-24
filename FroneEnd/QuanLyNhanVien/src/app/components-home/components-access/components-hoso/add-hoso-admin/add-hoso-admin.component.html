@@ -1,0 +1,323 @@
+<div class="main">
+  <div class="card">
+    <div class="card-header">
+      <h2>Thêm hồ sơ nhân viên</h2>
+    </div>
+    <div class="card-body">
+      <div class="container">
+        <a (click)="navigate('/hoso')"
+           style="cursor: pointer;"
+           class="link-primary btn-link text-decoration-none">
+          <i class="fa-solid fa-angle-left"></i>
+          Quay lại
+        </a>
+        <form #FormAdd="ngForm" (ngSubmit)="onAdd(FormAdd)">
+          <table class="table mx-auto" style="width: 70%">
+            <tbody>
+            <tr>
+              <td colspan="4">
+                <p class="mt-5 fw-bold">Thông tin cơ bản:</p>
+                <hr>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="form-label mt-2">Số hiệu nhân viên:</label>
+              </td>
+              <td>
+                <input class="form-control text-center" type="text" name="soHieuNhanVien" readonly [(ngModel)]="soHieuNV"/>
+              </td>
+              <td>
+                <label class="form-label ms-5 mt-2">Họ và tên:</label>
+              </td>
+              <td>
+                <input class="form-control text-center" type="text" name="hoVaTen" ngModel />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="form-label mt-2">Ngày sinh:</label>
+              </td>
+              <td>
+                <input class="form-control text-center" type="date" name="ngaySinh" ngModel/>
+              </td>
+              <td>
+                <label class="form-label ms-5 mt-2">Giới tính:</label>
+              </td>
+              <td>
+                <select required [(ngModel)]="gioiTinhSelected" name="gioiTinh" id="inputGioiTinh"
+                        class="form-select text-center s-gioi-tinh">
+                  <option [selected]="true" [disabled]="true" [value]="''">--- Chọn ---</option>
+                  <option>Nam</option>
+                  <option>Nữ</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="form-label mt-2">Nơi sinh:</label>
+              </td>
+              <td>
+                <select required [(ngModel)]="noiSinhSelected" name="noiSinh" id="inputNS"
+                        class="form-select p-1 s-gioi-tinh text-center">
+                  <option *ngFor="let tinhThanh of provinces">{{tinhThanh}}</option>
+                </select>
+              </td>
+              <td>
+                <label class="form-label ms-5 mt-2">Nơi ở hiện tại:</label>
+              </td>
+              <td>
+                <input class="form-control text-center" type="text" name="noiOHienTai" ngModel />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="form-label mt-2">Hộ khẩu thường trú:</label>
+              </td>
+              <td>
+                <input class="form-control text-center" type="text" name="hoKhauThuongTru" ngModel />
+              </td>
+              <td>
+                <label class="form-label ms-5 mt-2">CCCD/CMND:</label>
+              </td>
+              <td>
+                <input class="form-control text-center" type="number" name="soCmnd" ngModel />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="form-label mt-2">Dân tộc:</label>
+              </td>
+              <td>
+                <select required ngModel name="danToc"
+                        id="inputDanToc" class="form-select text-center">
+                  <option selected disabled value=""> --- Chọn ---</option>
+                  <option *ngFor="let itemdt of listDanToc" [value]="itemdt.maDanToc">
+                    {{itemdt['tenDanToc']}}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <label class="form-label mt-2 ms-5">Tôn giáo:</label>
+              </td>
+              <td>
+                <select required ngModel name="tonGiao"
+                        id="inputTonGiao"
+                        class="form-select text-center">
+                  <option selected disabled value=""> --- Chọn ---</option>
+                  <option *ngFor="let itemdt of listTonGiao" [value]="itemdt.maTonGiao">
+                    {{itemdt['tenTonGiao']}}
+                  </option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="form-label mt-2">Bảo hiểm xã hội:</label>
+              </td>
+              <td>
+                <input class="form-control text-center" type="text" name="soBaoHiemXh" ngModel />
+              </td>
+              <td>
+                <label class="form-label mt-2 ms-5">Ngày lập hồ sơ:</label>
+              </td>
+              <td>
+                <input class="form-control text-center" type="date" name="ngayLapHoSo" ngModel />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="form-label mt-2">Hình ảnh:</label>
+              </td>
+              <td colspan="3">
+                <input
+                  class="form-control"
+                  type="file"
+                  (change)="getFile($event)"
+                  [accept]="'image/jpeg'"
+                  ngModel name="imagePath">
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4">
+                <p class="mt-5 fw-bold">Trình độ/Bằng cấp:</p>
+                <hr>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="form-label mt-2">Trình độ GDPT:</label>
+              </td>
+              <td>
+                <select class="form-select text-center" [(ngModel)]="trinhDoGDPTSelected" name="trinhDoGDPT"
+                        required >
+                  <option [selected]="true">12/12</option>
+                  <option>10/10</option>
+                  <option>Không có</option>
+                </select>
+              </td>
+              <td>
+                <label class="form-label mt-2 ms-5">Học vị:</label>
+              </td>
+              <td>
+                <select class="form-select text-center" [(ngModel)]="hocViSelected" name="hocVi" required >
+                  <option [selected]="true">Không</option>
+                  <option>Tiến sĩ khoa học</option>
+                  <option>Tiến sĩ</option>
+                  <option>Thạc sĩ</option>
+                  <option>Cử nhân/Kỹ sư</option>
+                  <option>Tú tài</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="form-label mt-2">Học hàm:</label>
+              </td>
+              <td>
+                <select class="form-select text-center" [(ngModel)]="hocHamSelected" name="hocHam" required >
+                  <option [selected]="true">Không</option>
+                  <option>Giáo sư</option>
+                  <option>Phó giáo sư</option>
+                </select>
+              </td>
+              <td>
+                <label class="form-label ms-5 mt-2">Ngoại ngữ:</label>
+              </td>
+              <td>
+                <select class="form-select text-center" [(ngModel)]="ngoaiNguSelected" name="ngoaiNgu" required >
+                  <option [selected]="true">Không</option>
+                  <option>Anh</option>
+                  <option>Nga</option>
+                  <option>Pháp</option>
+                  <option>Đức</option>
+                  <option>Trung</option>
+                  <option>Nhật</option>
+                  <option>Hàn</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4">
+                <p class="mt-5 fw-bold">Vị trí/Chức vụ:</p>
+                <hr>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="form-label mt-2">Đơn vị:</label>
+              </td>
+              <td>
+                <select [(ngModel)]="donViSelected" name="sdonVi"
+                        [compareWith]='customCompareDV'
+                        (change)="loadListPhongBan(donViSelected)"
+                        id="inputDonVi" class="form-select text-center">
+                  <option *ngFor="let item of listDonVi" [ngValue]="item">
+                    {{item.tenDonVi}}
+                  </option>
+                </select>
+                <input type="hidden" [ngModel]="donViSelected" name="donVi">
+              </td>
+              <td>
+                <label class="form-label mt-2 ms-5">Phòng ban:</label>
+              </td>
+              <td>
+                <select  id="inputPhongBan" class="form-select text-center"
+                         [(ngModel)]="phongBanSelected" name="PhongBan"
+                         [compareWith]='customComparePB'>
+                  <option disabled [selected]="true">--- Chọn ---</option>
+                  <option *ngFor="let item of listPhongBan" [ngValue]="item">
+                    {{item.tenPhongBan}}
+                  </option>
+                </select>
+                <input type="hidden"  [ngModel]="phongBanSelected" name="phongBan">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="form-label mt-2">Vị trí/ Chức vụ:</label>
+              </td>
+              <td>
+                <select class="form-select text-center" required ngModel name="chucVu"
+                        id="inputChucVu">
+                  <option value="" disabled>--- Chọn ---</option>
+                  <option *ngFor="let item of listChucVu" [value]="item.maChucDanh">
+                    {{item['tenChucDanh']}}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <label class="form-label mt-2 ms-5">Ngày nhận vị trí/ bổ nhiệm:</label>
+              </td>
+              <td>
+                <input class="form-control text-center" required type="date" ngModel name="ngayBoNhiem">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="form-label mt-2">Trình độ chuyên môn:</label>
+              </td>
+              <td>
+                <select class="form-select text-center"
+                        [(ngModel)]="trinhDoChuyenMonSelected" name="trinhDoChuyenMon"
+                        required >
+                  <option [selected]="true">Không</option>
+                  <option>Fresher Developer</option>
+                  <option>Junior Developer</option>
+                  <option>Senior Developer</option>
+                  <option>Senior leader</option>
+                </select>
+              </td>
+              <td>
+                <label class="form-label mt-2 ms-5">Trạng thái hoạt động</label>
+              </td>
+              <td>
+                <select class="form-select text-center"
+                        [(ngModel)]="trangThaiSelected" name="trangThai"
+                        required >
+                  <option [selected]="true" [value]="''">--- Chọn ---</option>
+                  <option>Nghỉ việc</option>
+                  <option>Nghỉ phép</option>
+                  <option>Đang làm</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4">
+                <p class="mt-5 fw-bold">Mức lương:</p>
+                <hr>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="form-label mt-2">Lương(VNĐ):</label>
+              </td>
+              <td>
+                <input class="form-control text-center" required type="number" ngModel name="luong">
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" align="center">
+                <button class="btn btn-success mt-5 mb-3 ms-4" [disabled]="FormAdd.invalid">
+                  <i class="fa-solid fa-floppy-disk"></i>
+                  Lưu lại
+                </button>
+                <a href="/addhoso" class="btn btn-secondary mt-5 mb-3 ms-4">
+                  <i class="fa-solid fa-rotate-right"></i>
+                  Nhập lại
+                </a>
+                <a (click)="navigate('/hoso')"
+                   class="btn btn-secondary mt-5 mb-3 ms-4">
+                  <i class="fa-solid fa-angle-left"></i>Quay lại
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="liveAlertPlaceholder" class="w-25" style="position: fixed; right: 30px; bottom: 16px;"></div>
+
+</div>

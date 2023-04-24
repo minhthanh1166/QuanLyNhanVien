@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-size: 16px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #008080;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+
