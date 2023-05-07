@@ -5,6 +5,8 @@ import {DonViService} from "../../service/donvi.service";
 import {PhongBanService} from "../../service/phongban.service";
 import {interval, mapTo, Observable, scan, takeWhile} from "rxjs";
 import {DuanService} from "../../service/duan.service";
+import {LoginAdminComponent} from "../login-admin/login-admin.component";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-home-admin',
@@ -23,12 +25,13 @@ export class HomeAdminComponent implements OnInit {
   tongSoDuAn: any = 0;
   constructor(private tkService: TaikhoanService, private hoSoService: HoSoService,
               private donViService: DonViService, private phongBanService: PhongBanService,
-              private duAnService: DuanService) {
+              private duAnService: DuanService, private frmLogin: AppComponent) {
     this.getTongSoTaiKhoan();
     this.getTongSoNhanVien();
     this.getTongSoDonVi();
     this.getTongSoPhongBan();
     this.getTongSoDuAn();
+    frmLogin.handleShowHide();
   }
 
   ngOnInit(): void {

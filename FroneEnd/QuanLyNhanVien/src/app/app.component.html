@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 
-  <div class="sidebar close" [hidden]="hideSideBar('true')">
+  <div class="sidebar close" [hidden]="hideSideBar()">
     <div class="logo-details">
       <i class="bx bxl-c-plus-plus"></i>
       <span class="logo_name">Ocean Tech</span>
@@ -118,13 +118,13 @@
       </li>
     </ul>
   </div>
-  <section class="home-section" [hidden]="hideSideBar('true')">
+  <section class="home-section" [hidden]="hideSideBar()">
     <div class="home-content" >
       <i class="bx bx-menu"></i>
       <span class="text"></span>
     </div>
-    <div id="main" [hidden]="hideSideBar('false')">
-      <router-outlet></router-outlet>
-    </div>
+    <router-outlet></router-outlet>
   </section>
-
+  <div id="login-hide">
+  <app-login-admin></app-login-admin>
+  </div>

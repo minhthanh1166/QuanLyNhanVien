@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import { Location } from '@angular/common';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-root',
@@ -7,6 +10,9 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppComponent implements OnInit{
   title = 'QuanLyNhanVien';
+
+  constructor(private location: Location) {
+  }
 
   ngOnInit(): void {
 
@@ -26,11 +32,28 @@ export class AppComponent implements OnInit{
       // @ts-ignore
       sidebar.classList.toggle("close");
     });
+
+
+    console.log(this.location.path());
+    this.handleShowHide()
+  }
+
+  public handleShowHide() {
+    if(this.location.path() === "/home"){
+      // $("#login-hide").css("display", "none");
+      $(document).ready(function (){
+        $("#login-hide").css("display", "none");
+
+        // $('#login-hide').css("background-color", "red");
+      });
+    }
   }
 
 
   // @ts-ignore
-  hideSideBar(check: string) : boolean{
+  hideSideBar() : boolean{
       return !window.localStorage.getItem('token')
+
   }
+
 }
