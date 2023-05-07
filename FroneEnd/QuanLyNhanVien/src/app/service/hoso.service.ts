@@ -43,9 +43,7 @@ export class HoSoService {
     return this.http.put<HoSo>(`${this.apiServerUrl}/hoso/update?id=${objId}`, obj);
   }
 
-  public updateHoSoMucLuong(b: number, h: number, m: number): Observable<number> {
-    return this.http.put<number>(`${this.apiServerUrl}/hoso/updateheso?bac=${b}&heso=${h}&macb=${m}`, null);
-  }
+
   public updateHoSoDanhGia(d: string, dg: string, m: number): Observable<HoSo> {
     return this.http.put<HoSo>(`${this.apiServerUrl}/hoso/danhgia?ngaydg=${d}&id=${m}`, dg);
   }

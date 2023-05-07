@@ -15,6 +15,8 @@ import {HinhThucKhenThuongService} from "../../../../service/hinhthuckhenthuong.
 import {HinhThucKyLuatService} from "../../../../service/hinhthuckyluat.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {FormControl, FormGroup, NgForm} from "@angular/forms";
+import {DuAn} from "../../../../models/duan";
+import {DuanService} from "../../../../service/duan.service";
 
 @Component({
   selector: 'app-hoso-admin',
@@ -42,7 +44,7 @@ export class HosoAdminComponent {
   listPhongBan: PhongBan[] = [];
 
   constructor(private theService: HoSoService, private dvService: DonViService, private router: Router,
-              private cvService: ChucVuService, private pbService: PhongBanService,
+              private cvService: ChucVuService, private pbService: PhongBanService, private duAnService: DuanService,
               private qdktService: HinhThucKhenThuongService, private quaTrinhDTBDService: QuaTrinhDaoTaoBoiDuongService,
               private qdklService: HinhThucKyLuatService) {
   }
@@ -53,6 +55,7 @@ export class HosoAdminComponent {
     this.getListHTKyLuat();
     this.setDefaultDonViSelected();
     this.getListHoSo();
+    this.getDuAn();
     console.log("List" + this.editQD.donVi.tenDonVi)
   }
 
@@ -136,7 +139,8 @@ export class HosoAdminComponent {
         this.alertHold(alertPlaceholder, "Delete successfully!", "danger");
       },
       error: (HttpErrorResponse) => {
-        alert(HttpErrorResponse.message);
+        // alert(HttpErrorResponse.message);
+        alert("Nhân viên này đang làm dự án, không thể xoá!")
       }
     })
   }
@@ -242,7 +246,6 @@ export class HosoAdminComponent {
     this.alertHold(alertPlaceholder, "Đã lập quyết định khen thưởng!", "success");
 
   }
-
 
 
   onAddQDKL(addForm: NgForm): void {
@@ -362,6 +365,7 @@ export class HosoAdminComponent {
 
   getCheckBoxValue() {
     this.checkedValues = [];
+    this.nhanVienArr = [];
     for (let i = 0; i < this.checkboxes.length; i++) {
       // @ts-ignore
       if (this.checkboxes[i].checked) {
@@ -396,6 +400,9 @@ export class HosoAdminComponent {
     }
     if (mode == 'daotaoboiduong') {
       button.setAttribute('data-bs-target', '#multidaotaoboiduongModal');
+    }
+    if (mode == 'duan') {
+      button.setAttribute('data-bs-target', '#duanModal');
     }
     // @ts-ignore
     container.appendChild(button);
@@ -448,6 +455,14 @@ export class HosoAdminComponent {
     }
   }
 
+  customCompareN(o1: DuAn, o2: DuAn) {
+    if (o1 !== null && o2 !== null) {
+      return o1.id == o2.id;
+    } else {
+      return false;
+    }
+  }
+
 
   loadHoSoByPhongBan(phongBanSelected: PhongBan) {
     console.log(phongBanSelected);
@@ -460,6 +475,7 @@ export class HosoAdminComponent {
     });
   }
 
+  nhanVienArr: HoSo[] = [];
   onAddQDLDG(addDGForm: NgForm) {
     for (let idhoSoItem of this.checkedValues) {
       this.theService.getHoSo(idhoSoItem).subscribe({
@@ -470,7 +486,7 @@ export class HosoAdminComponent {
               next: data => {
                 console.log(data)
                 this.checkedValues = [];
-               this.getListHoSo();
+                this.getListHoSo();
                 addDGForm.reset();
 
               },
@@ -493,7 +509,6 @@ export class HosoAdminComponent {
   }
 
 
-
   denNgayQTDTBD: any = '';
   coSoDaoTaoBoiDuong: any = '';
   trinhDoDaoTaoBoiDuong: any = '';
@@ -509,7 +524,17 @@ export class HosoAdminComponent {
     trinhDoDaoTaoBoiDuong: new FormControl(),
     trangThaiDaoTaoBoiDuong: new FormControl(this.trangThaiDaoTaoBoiDuongSelected)
   });
+  chonDuAnTen: DuAn = new DuAn();
+  danhSachDuAn: DuAn[] = [];
 
+
+  getDuAn() {
+    this.duAnService.listDuAn().subscribe(
+      (data) => {
+        this.danhSachDuAn = data;
+      }
+    );
+  }
 
   onAddQuaTrinhDTBD() {
     for (let argument of this.checkedValues) {
@@ -541,5 +566,30 @@ export class HosoAdminComponent {
     // @ts-ignore
     this.alertHold(alertPlaceholder, "Đã lưu thông tin đào tạo/ bồi dưỡng!", "success");
   }
+
+  onAddDuAn(duAnForm: NgForm) {
+    this.duAnService.updateHoSoDuAn(this.chonDuAnTen.id, this.checkedValues)
+      .subscribe({
+        next: data => {
+          console.log(data)
+          this.checkedValues = [];
+          this.getListHoSo();
+          duAnForm.reset();
+
+          // @ts-ignore
+          document.getElementById('obj-form-duan').click();
+          // let formData = new FormData();
+          // formData.append('file', this.fileUpload);
+        },
+        error: err1 => {
+
+        }
+      });
+    // @ts-ignore
+    document.getElementById('obj-form-duan').click();
+    const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+    // @ts-ignore
+    this.alertHold(alertPlaceholder, "Đã thêm vào dự án!", "success");
+    }
 }
 

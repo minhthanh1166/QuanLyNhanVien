@@ -44,5 +44,4 @@ export class TaikhoanService {
   public deleteTK(objId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/taikhoan/${objId}`);
   }
-
 }

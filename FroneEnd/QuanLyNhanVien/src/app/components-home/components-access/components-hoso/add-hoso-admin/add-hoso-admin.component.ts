@@ -235,26 +235,6 @@ export class AddHosoAdminComponent {
       return false;
     }
   }
-  // setDefaultDonViSelected() {
-  //   this.DVService.getDonVi('BNV54').subscribe({
-  //     next: value => {
-  //       this.donViSelected = value;
-  //       this.loadListPhongBan(value);
-  //     },
-  //     error: err => {
-  //       console.log(err);
-  //       this.DVService.getDonVi('BNV54').subscribe({
-  //         next: value => {
-  //           this.donViSelected = value;
-  //           this.loadListPhongBan(value);
-  //         },
-  //         error: errs => {
-  //           console.log(errs)
-  //         }
-  //       })
-  //     }
-  //   });
-  // }
   private setDefaultDonViSelected() {
     this.phongBanService.listPhongBan().subscribe(
       {
@@ -279,22 +259,25 @@ export class AddHosoAdminComponent {
     }
   }
 
+  customCompareCV(o1: ChucVu, o2: ChucVu) {
+    if(o1 !== null && o2 !== null) {
+      return o1.maChucDanh == o2.maChucDanh;
+    }
+    else {
+      return false;
+    }
+  }
+
   getFile(event: Event) {
     // @ts-ignore
     this.fileUpload = event.target.files[0];
     console.log(this.fileUpload);
   }
 
-  loadListPhongBan(donViSelectedChange: DonVi) {
-    this.phongBanService.listPhongBanByDonVi(donViSelectedChange).subscribe({
-      next: data => {
-        console.log(data)
-        this.listPhongBan = data;
-      },
-      error: err => {}
-    });
-  }
 
   protected readonly PhongBan = PhongBan;
+  chucVuSelect: any = null;
+  phongBanSelect: any = null;
+  donViSelect: any = null;
 
 }

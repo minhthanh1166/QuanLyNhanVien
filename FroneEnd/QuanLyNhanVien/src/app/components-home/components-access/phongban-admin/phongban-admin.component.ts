@@ -29,9 +29,7 @@ export class PhongbanAdminComponent implements OnInit{
 
   ngOnInit(): void {
     this.getListDonVi();
-    this.setDefaultDonViSelected();
     this.getListPhongBan();
-    this.onChangeDonVi(this.donViSelected);
   }
 
   public getListPhongBan(): void {
@@ -153,7 +151,7 @@ export class PhongbanAdminComponent implements OnInit{
     button.setAttribute('data-bs-toggle', 'modal');
     if (mode === 'add') {
       button.setAttribute('data-bs-target', '#addModal');
-      this.setDefaultDonViSelected();
+
     }
     // @ts-ignore
     container.appendChild(button);
@@ -208,28 +206,6 @@ export class PhongbanAdminComponent implements OnInit{
   donViSelected: DonVi = new DonVi();
   maDV: any;
   phongBanSelected: any;
-
-  setDefaultDonViSelected() {
-    this.dvService.getDonVi('BNV54').subscribe({
-      next: value => {
-        this.donViSelected = value
-        console.log('dv value: ' + value.maDonVi);
-        this.onChangeDonVi(this.donViSelected);
-      },
-      error: err => {
-        console.log(err);
-        this.dvService.getDonViByName('Trung tâm thông tin').subscribe({
-          next: vdata => {
-            this.donViSelected = vdata;
-            this.onChangeDonVi(this.donViSelected);
-          },
-          error: errs => {
-            console.log(errs);
-          }
-        });
-      }
-    });
-  }
 
   customCompareDV(o1: DonVi, o2: DonVi) {
     if(o1 !== null && o2 !== null) {

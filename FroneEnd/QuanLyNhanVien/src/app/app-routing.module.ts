@@ -19,25 +19,32 @@ import {
 import {KyluatAdminComponent} from "./components-home/components-access/kyluat-admin/kyluat-admin.component";
 import {LoginAdminComponent} from "./components-home/login-admin/login-admin.component";
 import {ThongkeAdminComponent} from "./components-home/components-access/thongke-admin/thongke-admin.component";
-import {DuanAdminComponent} from "./components-home/components-access/duan-admin/duan-admin.component";
+import {DuanAdminComponent} from "./components-home/components-access/component-duan/duan-admin/duan-admin.component";
+import {
+  XemchitietAdminComponent
+} from "./components-home/components-access/component-duan/xemchitiet-admin/xemchitiet-admin.component";
+
+import { AuthGuard } from "./service/auth.guard"
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeAdminComponent },
-  { path: 'taikhoan', component: TaikhoanAdminComponent },
-  { path: 'phongban', component: PhongbanAdminComponent },
-  { path: 'dantoc', component: DantocAdminComponent },
-  { path: 'tongiao', component: TongiaoAdminComponent },
-  { path: 'donvi', component: DonviAdminComponent },
-  { path: 'hoso', component: HosoAdminComponent,  },
-  { path: 'addhoso', component: AddHosoAdminComponent },
-  { path: 'chucvu', component: ChucvuAdminComponent },
-  { path: 'edithoso/:id', component: EditHosoAdmimComponent },
-  { path: 'khenthuong', component: KhenthuongAdminComponent },
-  { path: 'kyluat', component: KyluatAdminComponent },
-  { path: 'login', component: LoginAdminComponent },
-  { path: 'thongke', component: ThongkeAdminComponent },
-  { path: 'duan', component: DuanAdminComponent },
+  { path: 'home', component: HomeAdminComponent, canActivate: [AuthGuard]},
+  { path: 'taikhoan', component: TaikhoanAdminComponent,  canActivate: [AuthGuard] },
+  { path: 'phongban', component: PhongbanAdminComponent,  canActivate: [AuthGuard] },
+  { path: 'dantoc', component: DantocAdminComponent,  canActivate: [AuthGuard] },
+  { path: 'tongiao', component: TongiaoAdminComponent,  canActivate: [AuthGuard] },
+  { path: 'donvi', component: DonviAdminComponent,  canActivate: [AuthGuard] },
+  { path: 'hoso', component: HosoAdminComponent,  canActivate: [AuthGuard] },
+  { path: 'addhoso', component: AddHosoAdminComponent,  canActivate: [AuthGuard] },
+  { path: 'chucvu', component: ChucvuAdminComponent,  canActivate: [AuthGuard] },
+  { path: 'edithoso/:id', component: EditHosoAdmimComponent,  canActivate: [AuthGuard] },
+  { path: 'khenthuong', component: KhenthuongAdminComponent,  canActivate: [AuthGuard] },
+  { path: 'kyluat', component: KyluatAdminComponent,  canActivate: [AuthGuard] },
+  { path: 'login', component: LoginAdminComponent},
+  { path: 'thongke', component: ThongkeAdminComponent,  canActivate: [AuthGuard] },
+  { path: 'duan', component: DuanAdminComponent,  canActivate: [AuthGuard] },
+  { path: 'xemchitiet-duan', component: XemchitietAdminComponent,  canActivate: [AuthGuard] },
 ];
 
 @NgModule({

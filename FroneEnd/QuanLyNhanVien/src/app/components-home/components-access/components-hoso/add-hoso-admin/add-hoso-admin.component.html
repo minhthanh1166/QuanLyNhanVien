@@ -4,13 +4,14 @@
       <h2>Thêm hồ sơ nhân viên</h2>
     </div>
     <div class="card-body">
+      <a (click)="navigate('/hoso')"
+         style="cursor: pointer;"
+         class="link-primary btn-link text-decoration-none">
+        <i class="fa-solid fa-angle-left"></i>
+        Quay lại
+      </a>
       <div class="container">
-        <a (click)="navigate('/hoso')"
-           style="cursor: pointer;"
-           class="link-primary btn-link text-decoration-none">
-          <i class="fa-solid fa-angle-left"></i>
-          Quay lại
-        </a>
+
         <form #FormAdd="ngForm" (ngSubmit)="onAdd(FormAdd)">
           <table class="table mx-auto" style="width: 70%">
             <tbody>
@@ -162,10 +163,9 @@
               <td>
                 <select class="form-select text-center" [(ngModel)]="hocViSelected" name="hocVi" required >
                   <option [selected]="true">Không</option>
-                  <option>Tiến sĩ khoa học</option>
+                  <option>Cử nhân/Kỹ sư</option>
                   <option>Tiến sĩ</option>
                   <option>Thạc sĩ</option>
-                  <option>Cử nhân/Kỹ sư</option>
                   <option>Tú tài</option>
                 </select>
               </td>
@@ -199,7 +199,7 @@
             </tr>
             <tr>
               <td colspan="4">
-                <p class="mt-5 fw-bold">Vị trí/Chức vụ:</p>
+                <p class="mt-5 fw-bold">Vị trí:</p>
                 <hr>
               </td>
             </tr>
@@ -208,10 +208,10 @@
                 <label class="form-label mt-2">Đơn vị:</label>
               </td>
               <td>
-                <select [(ngModel)]="donViSelected" name="sdonVi"
+                <select [(ngModel)]="donViSelect" name="sdonVi"
                         [compareWith]='customCompareDV'
-                        (change)="loadListPhongBan(donViSelected)"
                         id="inputDonVi" class="form-select text-center">
+                  <option disabled [value]="null">--- Chọn ---</option>
                   <option *ngFor="let item of listDonVi" [ngValue]="item">
                     {{item.tenDonVi}}
                   </option>
@@ -223,9 +223,9 @@
               </td>
               <td>
                 <select  id="inputPhongBan" class="form-select text-center"
-                         [(ngModel)]="phongBanSelected" name="PhongBan"
+                         [(ngModel)]="phongBanSelect" name="PhongBan"
                          [compareWith]='customComparePB'>
-                  <option disabled [selected]="true">--- Chọn ---</option>
+                  <option disabled [value]="null">--- Chọn ---</option>
                   <option *ngFor="let item of listPhongBan" [ngValue]="item">
                     {{item.tenPhongBan}}
                   </option>
@@ -238,10 +238,11 @@
                 <label class="form-label mt-2">Vị trí/ Chức vụ:</label>
               </td>
               <td>
-                <select class="form-select text-center" required ngModel name="chucVu"
-                        id="inputChucVu">
-                  <option value="" disabled>--- Chọn ---</option>
-                  <option *ngFor="let item of listChucVu" [value]="item.maChucDanh">
+                <select class="form-select text-center"
+                        [(ngModel)]="chucVuSelect" name="chucVu"
+                        id="inputChucVu" [compareWith]="customCompareCV">
+                  <option [value]="null" disabled>--- Chọn ---</option>
+                  <option *ngFor="let item of listChucVu" [ngValue]="item">
                     {{item['tenChucDanh']}}
                   </option>
                 </select>

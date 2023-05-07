@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,12 +18,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DuAn {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String tenDuAn;
-//    @OneToMany(mappedBy = "duAn", cascade = CascadeType.ALL)
-//    private List<HoSo> listNhanVien;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "du_an", foreignKey = @ForeignKey(name = "fkq"))
+    private List<HoSo> listNhanVien;
     @Temporal(TemporalType.DATE)
     private Date ngayLapHoSoDuAn;
     @Temporal(TemporalType.DATE)
@@ -32,4 +34,6 @@ public class DuAn {
     private byte soNhanSuLamDuAn;
     private byte trangThai;
     private double tongKinhPhi;
+
+
 }

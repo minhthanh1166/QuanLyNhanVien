@@ -9,6 +9,7 @@ import org.hibernate.annotations.DialectOverride;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
@@ -48,8 +49,9 @@ public class HoSo implements Serializable {
     private long tonGiao;
     private String soCmnd;
 
-    @JoinColumn(name = "chuc_vu", foreignKey = @ForeignKey(name = "maChucVu"))
-    private String chucVu;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "chuc_vu", foreignKey = @ForeignKey(name = "chuc_vu_ho_so_Fk"))
+    private ChucVu chucVu;
 
     @Temporal(TemporalType.DATE)
     private Date ngayBoNhiem;
@@ -79,4 +81,6 @@ public class HoSo implements Serializable {
     private String trangThai;
     @Temporal(TemporalType.DATE)
     private Date ngayLapHoSo;
+
+
 }

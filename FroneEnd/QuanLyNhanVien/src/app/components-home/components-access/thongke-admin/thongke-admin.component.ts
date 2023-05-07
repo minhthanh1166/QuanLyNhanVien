@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {HoSo} from "../../../models/hoso";
 import {HoSoService} from "../../../service/hoso.service";
 import {formatDate} from "@angular/common";
-
+import {DuAn} from "../../../models/duan";
+import {DuanService} from "../../../service/duan.service";
+import * as $ from 'jquery';
 @Component({
   selector: 'app-thongke-admin',
   templateUrl: './thongke-admin.component.html',
@@ -12,11 +14,15 @@ export class ThongkeAdminComponent implements OnInit{
   dataSource: Object | undefined;
   private dataTrinhDoChuyenMon: any;
   private listHoSo: HoSo[] = [];
+
+  private listDuAn: DuAn[] = [];
   dataSourceLuong: any;
   private dataLuong: any;
   dataSourceNhanVienThang: any;
   private dataNVThang: any;
-  constructor(private hoSoSevice: HoSoService) {
+  dataSourceDuAn: any;
+  private dataDuAnThang: any;
+  constructor(private hoSoSevice: HoSoService, private duAnService: DuanService) {
    this.getListHoSo();
     this.chartDataHoSo()
   }
@@ -24,8 +30,16 @@ export class ThongkeAdminComponent implements OnInit{
 
   ngOnInit(): void {
     this.getListHoSo();
+    this.getListDuAn();
+    this.handelJquery();
   }
 
+
+  private handelJquery() {
+    $(document).ready(() => {
+      $('.raphael-group-209-caption').addClass('.active')
+    });
+  }
   public getListHoSo(): void {
     this.hoSoSevice.listHoSo().subscribe(
       {
@@ -39,6 +53,21 @@ export class ThongkeAdminComponent implements OnInit{
           this.chartDataLuong();
           this.setDataDSThang(res);
           this.chartDataThang();
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      }
+    )
+  }
+
+  public getListDuAn(): void {
+    this.duAnService.listDuAn().subscribe(
+      {
+        next: (res) => {
+          this.listDuAn = res;
+          this.setDataDSDuAn(res);
+          this.chartDataDuAn();
         },
         error: (err) => {
           console.log(err);
@@ -254,4 +283,65 @@ export class ThongkeAdminComponent implements OnInit{
       data: this.dataNVThang
     };
   }
+
+  private chartDataDuAn() {
+    this.dataSourceDuAn = {
+      chart: {
+        //Set the chart caption
+        caption: "Thống kê số dự án trong năm",
+        //Set the x-axis name
+        xAxisName: "Theo tháng",
+        //Set the y-axis name
+        yAxisName: "Số lượng",
+        //Set the theme for your chart
+        theme: "fusion"
+      },
+      // Chart Data - from step 2
+      data: this.dataDuAnThang
+    };
+  }
+
+  private setDataDSDuAn(res: DuAn[]) {
+    let quy1 = 0;
+    let quy2 = 0;
+    let quy3 = 0;
+    let quy4 = 0;
+    let monthOfHoSo : any;
+    for (let duAn of res) {
+      monthOfHoSo = parseInt(formatDate(duAn.ngayLapHoSoDuAn, 'M', 'en-US').toString());
+      console.log('Tháng: ' + monthOfHoSo);
+      if (monthOfHoSo >= 1 && monthOfHoSo <= 3) {
+        quy1++;
+      }
+      else if (monthOfHoSo > 3 && monthOfHoSo <= 6) {
+        quy2++;
+      }
+      else if (monthOfHoSo > 6 && monthOfHoSo <= 9) {
+        quy3++;
+      }
+      else if (monthOfHoSo > 9 && monthOfHoSo <= 12) {
+        quy4++;
+      }
+    }
+    this.dataDuAnThang = [
+      {
+        label: 'Tháng 1 - 3',
+        value: quy1.toString()
+      },
+      {
+        label: 'Tháng 4 - 6',
+        value: quy2.toString()
+      },
+      {
+        label: 'Tháng 7 - 9',
+        value: quy3.toString()
+      },
+      {
+        label: 'Tháng 10 - 12',
+        value: quy4.toString()
+      },
+    ];
+  }
+
+
 }

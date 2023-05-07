@@ -3,13 +3,14 @@
     <h2>Cập nhật hồ sơ nhân viên</h2>
   </div>
   <div class="card-body">
+    <a (click)="navigate('/hoso')"
+       style="cursor: pointer;"
+       class="link-primary btn-link text-decoration-none">
+      <i class="fa-solid fa-angle-left"></i>
+      Quay lại
+    </a>
     <div class="container">
-      <a (click)="navigate('/hoso')"
-         style="cursor: pointer;"
-         class="link-primary btn-link text-decoration-none">
-        <i class="fa-solid fa-angle-left"></i>
-        Quay lại
-      </a>
+
       <form #editForm="ngForm">
         <table class="table mx-auto" style="width: 70%">
           <tbody>
@@ -157,10 +158,9 @@
             <td>
               <select class="form-select text-center" [(ngModel)]="loadHoSo.hocVi" name="hocVi" required>
                 <option [selected]="true">Không</option>
-                <option>Tiến sĩ khoa học</option>
+                <option>Cử nhân/Kỹ sư</option>
                 <option>Tiến sĩ</option>
                 <option>Thạc sĩ</option>
-                <option>Cử nhân/Kỹ sư</option>
                 <option>Tú tài</option>
               </select>
             </td>
@@ -235,7 +235,7 @@
             <td>
               <select class="form-select text-center" required ngModel name="chucVu"
                       id="inputChucVu" [ngModel]="loadHoSo.chucVu">
-                <option *ngFor="let item of listChucVu" [value]="item.maChucDanh">
+                <option *ngFor="let item of listChucVu" [value]="item">
                   {{item['tenChucDanh']}}
                 </option>
               </select>

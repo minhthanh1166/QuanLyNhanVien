@@ -1,0 +1,156 @@
+<!--<div class="card">-->
+<!--  <div class="card-header">-->
+
+<!--  </div>-->
+<!--  <div class="card-body">-->
+<!--    <div class="container">-->
+
+<!--  </div>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<div class="card">
+  <div class="card-header">
+    <h2>Danh sách nhân viên làm trong dự án</h2>
+  </div>
+  <div class="card-body">
+    <a routerLink="/duan"
+       style="cursor: pointer;"
+       class="link-primary btn-link text-decoration-none">
+      <i class="fa-solid fa-angle-left"></i>
+      Quay lại
+    </a>
+    <div class="container mt-5 w-50" id="main-container">
+
+      <div class="d-flex">
+        <a
+          class="btn btn-outline-secondary text-decoration-none mb-2"
+          style="height: 36px"
+          id="x-btn-open-x"
+          href="/xemchitiet-duan">
+          <i class="fa-solid fa-arrows-rotate"></i>
+          Tải lại trang
+        </a>
+      </div>
+      <table class="table table-striped table-hover">
+        <thead class="mt-3 text-light" style="background-color: #1d1b31">
+        <tr>
+          <th>ID</th>
+          <th>Tên dự án</th>
+          <th>Số nhân viên làm</th>
+          <th>Họ và tên</th>
+          <th>Đơn vị</th>
+          <th>Phòng ban</th>
+          <th>Vị trí</th>
+          <th>Lựa chọn</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr
+          *ngFor="
+              let item of listDuAn
+                | paginate
+                  : {
+                      id: 'dan-toc-p',
+                      itemsPerPage: 5,
+                      currentPage: p,
+                      totalItems: listDuAn.length
+                    }
+            "
+        >
+          <td>{{ item.id }}</td>
+          <td>{{ item.tenDuAn }}</td>
+          <td>{{item.listNhanVien.length}}</td>
+          <td>
+            <span *ngFor="let nv of item.listNhanVien">{{nv.hoVaTen}}<br></span>
+          </td>
+          <td>
+            <span *ngFor="let nv of item.listNhanVien">{{nv.donVi.tenDonVi}}<br></span>
+          </td>
+          <td>
+            <span *ngFor="let nv of item.listNhanVien">{{nv.phongBan.tenPhongBan}}<br></span>
+          </td>
+          <td>
+            <span *ngFor="let nv of item.listNhanVien">{{nv.chucVu.tenChucDanh}}<br></span>
+          </td>
+          <td>
+            <a
+              class="btn btn-sm btn-danger tooltips mb-1"
+              data-placement="top"
+              data-toggle="tooltip" (click)="onOpenEditOrDeleteModal( item, 'delete')"
+              data-original-title="Delete">
+              <i class="fa-solid fa-eraser me-1"></i>
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <nav class="mt-5 text-center w-100">
+        <pagination-controls
+          (pageChange)="p = $event"
+          id="dan-toc-p"
+          previousLabel=""
+          nextLabel=""
+        >
+        </pagination-controls>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Delete-->
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="deleteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Xoá thông tin</h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          style="border: 0; border-radius: 25%; padding: 0 5px"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">X</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label *ngFor="let nv of deleteDuAn.listNhanVien" style="display: block">
+          <input type="checkbox" (change)="getCheckedNV($event)" [value]="nv.idHoSo" name="check-box">
+          {{nv.hoVaTen}}
+        </label>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          id="delete-nvda-no"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal">
+          Bỏ
+        </button>
+        <button type="button" (click)="onDelete(deleteDuAn.id)" class="btn btn-danger">
+          Xoá
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div
+  id="liveAlertPlaceholder"
+  class="w-25"
+  style="position: fixed; right: 30px; bottom: 16px"
+></div>
+

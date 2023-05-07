@@ -1,5 +1,6 @@
 import {DonVi} from "./donvi";
 import {PhongBan} from "./phongban";
+import {ChucVu} from "./chucvu";
 
 export class HoSo {
   idHoSo : number = 0; //
@@ -16,7 +17,7 @@ export class HoSo {
   danToc : number = 0; //
   tonGiao : number = 0; //
   soCmnd ?: string; //
-  chucVu : string = ''; //
+  chucVu : ChucVu = new ChucVu(); //
   ngayBoNhiem ?: string; //
   luong : number = 0; //
   trinhDoGDPT ?: string; //

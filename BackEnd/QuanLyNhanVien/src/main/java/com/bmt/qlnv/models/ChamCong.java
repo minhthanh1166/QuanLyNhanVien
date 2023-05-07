@@ -16,5 +16,7 @@ public class ChamCong {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idChamCong;
-
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "du_an", foreignKey = @ForeignKey(name = "maduan_frk"))
+    private DuAn DuAn;
 }

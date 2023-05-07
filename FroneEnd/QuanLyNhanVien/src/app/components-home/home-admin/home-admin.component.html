@@ -1,6 +1,6 @@
 <section id="section">
   <div class="main">
-    <div class="header__body active-bg-purple-light">
+    <div class="header__body active-bg-purple">
       <h1 class="header__title">Công ty tnhh ocean tech</h1>
     </div>
 
@@ -58,7 +58,8 @@
       <div class="d-flex justify-content-center mt-5">
         <div class="box__item active-bg-purple-dark me-5">
           <div class="box__title">
-            <span>152</span>
+            <span class="countdown" *ngIf="countdown$ | async as countdown">{{countdown}}</span>
+            <span class="countdown" *ngIf="countdown == 0">{{tongSoDuAn}}</span>
             <p>Tổng số dự án</p>
           </div>
           <div class="box-icon">

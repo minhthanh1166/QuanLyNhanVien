@@ -15,7 +15,7 @@
           Thêm
         </a>
         <a
-          class="btn  me-2 btn-outline-secondary text-decoration-none"
+          class="btn  me-2 btn-outline-secondary text-decoration-none me-5"
           style="height: 36px"
           id="x-btn-open-x"
           href="/hoso"
@@ -23,18 +23,10 @@
           <i class="fa-solid fa-arrows-rotate"></i>
           Tải lại trang
         </a>
-        <a
-          class="btn btn-outline-primary me-5"
-          style="height: 36px;"
-          id="ds-btn-open-luong"
-          routerLink="/ds-luong"
-        >
-          Danh sách lương
-        </a>
 
         <input
           type="button"
-          class="btn  me-2 btn-outline-primary text-decoration-none"
+          class="btn  me-2 btn-outline-primary text-decoration-none ms-4"
           style="height: 36px; cursor: pointer"
           value="Khen thưởng"
           id="ds-btn-open-kt"
@@ -63,10 +55,10 @@
           type="button"
           class="btn btn-sm me-2 btn-outline-primary text-decoration-none"
           style="height: 36px; cursor: pointer"
-          value="Đào tạo/ bồi dưỡng"
-          id="ds-btn-open-dtbd"
+          value="Dự án"
+          id="ds-btn-open-dtb1d"
           [disabled]="isChecked()"
-          (click)="onOpenModalMulti('daotaoboiduong')"
+          (click)="onOpenModalMulti('duan')"
         />
       </section>
 
@@ -158,7 +150,15 @@
           <td>{{ item.hoVaTen }}</td>
           <td>{{ item.gioiTinh }}</td>
           <td>{{ item.ngaySinh | date : "dd/MM/Y" }}</td>
-          <td>{{ item.trangThai }}</td>
+          <td *ngIf="item.trangThai == 'Nghỉ việc'">
+            <span style="padding: 10px; border-radius: 10px; background-color: #dc3545;font-weight: bold; color: white ">Nghỉ việc</span>
+          </td>
+          <td *ngIf="item.trangThai == 'Nghỉ phép'">
+            <span style="padding: 10px; border-radius: 10px; background-color: #ffc107;font-weight: bold; color: black ">Nghỉ phép</span>
+          </td>
+          <td *ngIf="item.trangThai == 'Đang làm'">
+            <span style="padding: 10px; border-radius: 10px; background-color: green;font-weight: bold; color: white ">Đang làm</span>
+          </td>
           <td>{{ item.phongBan.tenPhongBan }}</td>
           <td>
             <div class="float-right btn-group btn-group-sm">
@@ -216,20 +216,6 @@
                     (click)="onOpenModal(item, 'danhgia')">
                     <i class="fa-regular fa-star"></i>
                     Đánh giá
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item btn"
-                    data-original-title="KyLuat"
-                    (click)="
-                        navigateCTHoSo(
-                          '/chi-tiet-qua-trinh-dao-tao-boi-duong',
-                          item.idHoSo
-                        )
-                      ">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                    QT Đào tạo/ bồi dưỡng
                   </a>
                 </li>
               </ul>
@@ -1074,6 +1060,66 @@
                 </button>
                 <button
                   [disabled]="addQuaTrinhDTBDForm.invalid"
+                  type="submit"
+                  class="btn btn-success"
+                >
+                  Lưu
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div
+      class="modal fade"
+      id="duanModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="duanModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content w-100">
+          <div class="modal-header">
+            <h5 class="modal-title" id="duanModalLabel">
+              Dự án
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              style="border: 0; border-radius: 25%; padding: 0 5px"
+            >
+              <span aria-hidden="true">X</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form
+              #duanForm="ngForm"
+              (ngSubmit)="onAddDuAn(duanForm)">
+              <input type="hidden" formControlName="hoSo"/>
+              <div class="mb-3">
+                <label class="form-label">Tên dự án:</label>
+                <select class="form-select" [(ngModel)]="chonDuAnTen" [name]="'duAn'" [compareWith]="customCompareN">
+                  <option *ngFor="let item of danhSachDuAn" [ngValue]="item">{{item.tenDuAn}}</option>
+                </select>
+              </div>
+
+              <div class="modal-footer mt-5">
+                <button
+                  type="button"
+                  id="obj-form-duan"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal">
+                  Đóng
+                </button>
+                <button
+                  [disabled]="duanForm.invalid"
                   type="submit"
                   class="btn btn-success"
                 >

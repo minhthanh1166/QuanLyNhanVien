@@ -29,4 +29,8 @@ export class AppComponent implements OnInit{
   }
 
 
+  // @ts-ignore
+  hideSideBar(check: string) : boolean{
+      return !window.localStorage.getItem('token')
+  }
 }
