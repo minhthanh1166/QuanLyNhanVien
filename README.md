@@ -1,2 +1,6 @@
 # QuanLyNhanVien
- MinhThanh
+
+
+use technology: 
+- Spring boot
+- Angular
