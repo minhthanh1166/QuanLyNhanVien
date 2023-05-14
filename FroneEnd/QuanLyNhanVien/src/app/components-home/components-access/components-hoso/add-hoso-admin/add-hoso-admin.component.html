@@ -208,7 +208,7 @@
                 <label class="form-label mt-2">Đơn vị:</label>
               </td>
               <td>
-                <select [(ngModel)]="donViSelect" name="sdonVi"
+                <select [(ngModel)]="donViSelected" name="sdonVi"
                         [compareWith]='customCompareDV'
                         id="inputDonVi" class="form-select text-center">
                   <option disabled [value]="null">--- Chọn ---</option>
@@ -223,7 +223,7 @@
               </td>
               <td>
                 <select  id="inputPhongBan" class="form-select text-center"
-                         [(ngModel)]="phongBanSelect" name="PhongBan"
+                         [(ngModel)]="phongBanSelected" name="PhongBan"
                          [compareWith]='customComparePB'>
                   <option disabled [value]="null">--- Chọn ---</option>
                   <option *ngFor="let item of listPhongBan" [ngValue]="item">
@@ -266,7 +266,9 @@
                   <option>Fresher Developer</option>
                   <option>Junior Developer</option>
                   <option>Senior Developer</option>
-                  <option>Senior leader</option>
+                  <option>Lead Developer</option>
+                  <option>Mid-level Manager</option>
+                  <option>Senior Leader</option>
                 </select>
               </td>
               <td>

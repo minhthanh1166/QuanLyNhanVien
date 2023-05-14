@@ -1,130 +1,133 @@
+<link
+  href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+  rel="stylesheet"
+/>
 
-  <link
-    href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-    rel="stylesheet"
-  />
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 
-  <div class="sidebar close" [hidden]="hideSideBar()">
-    <div class="logo-details">
-      <i class="bx bxl-c-plus-plus"></i>
-      <span class="logo_name">Ocean Tech</span>
-    </div>
-    <ul class="nav-links">
-      <li>
+<div class="sidebar close" [hidden]="hideSideBar()">
+  <div class="logo-details">
+    <i class="bx bxl-c-plus-plus"></i>
+    <span class="logo_name">Ocean Tech</span>
+  </div>
+  <ul class="nav-links">
+    <li>
+      <a>
+        <i class="bx bx-grid-alt"></i>
+        <span class="link_name" routerLink="/home" style="cursor: pointer">Trang chủ</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" routerLink="/home">Trang chủ</a></li>
+      </ul>
+    </li>
+    <li>
+      <a>
+        <i class="bx bx-pie-chart-alt-2"></i>
+        <span class="link_name" routerLink="/thongke" style="cursor: pointer">Thống kê</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" routerLink="/thongke">Thống kê</a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="iocn-link">
         <a>
-          <i class="bx bx-grid-alt"></i>
-          <span class="link_name" routerLink="/home" style="cursor: pointer">Trang chủ</span>
+          <i class="bx bx-collection"></i>
+          <span class="link_name">Quản lý</span>
         </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" routerLink="/home">Trang chủ</a></li>
-        </ul>
-      </li>
-      <li>
+        <i class="bx bxs-chevron-down arrow"></i>
+      </div>
+
+      <ul class="sub-menu">
+        <li><a class="link_name">Quản lý</a></li>
+        <li><a routerLink="/taikhoan">Tài khoản</a></li>
+        <li><a routerLink="/donvi">Đơn vị</a></li>
+        <li><a routerLink="/phongban">Phòng ban</a></li>
+        <li><a routerLink="/chucvu">Vị trí/Chức vụ</a></li>
+        <li><a routerLink="/duan">Dự án</a></li>
+        <li><a routerLink="/hoso">Hồ sơ nhân viên</a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="iocn-link">
         <a>
-          <i class="bx bx-pie-chart-alt-2"></i>
-          <span class="link_name" routerLink="/thongke"  style="cursor: pointer">Thống kê</span>
+          <i class="bx bx-book-alt"></i>
+          <span class="link_name">Quyết định</span>
         </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" routerLink="/thongke">Thống kê</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a>
-            <i class="bx bx-collection"></i>
-            <span class="link_name">Quản lý</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
+        <i class="bx bxs-chevron-down arrow"></i>
+      </div>
+      <ul class="sub-menu">
+        <li><a class="link_name">Quyết định</a></li>
+        <li><a routerLink="/khenthuong">Khen thưởng</a></li>
+        <li><a routerLink="/kyluat">Kỷ luật</a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="iocn-link">
+        <a>
+          <!--          <i class="bx bx-book-alt"></i>-->
+          <i class="fa-solid fa-synagogue"></i>
+          <!--&lt;!&ndash;          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-signpost-split" viewBox="0 0 16 16">&ndash;&gt;-->
+          <!--&lt;!&ndash;            <path d="M7 7V1.414a1 1 0 0 1 2 0V2h5a1 1 0 0 1 .8.4l.975 1.3a.5.5 0 0 1 0 .6L14.8 5.6a1 1 0 0 1-.8.4H9v10H7v-5H2a1 1 0 0 1-.8-.4L.225 9.3a.5.5 0 0 1 0-.6L1.2 7.4A1 1 0 0 1 2 7h5zm1 3V8H2l-.75 1L2 10h6zm0-5h6l.75-1L14 3H8v2z"/>&ndash;&gt;-->
+          <!--&lt;!&ndash;          </svg>&ndash;&gt;-->
+          <!--          <i class="bi bi-signpost-split"></i>-->
+          <span class="link_name">Thông tin</span>
+        </a>
+        <i class="bx bxs-chevron-down arrow"></i>
+      </div>
+      <ul class="sub-menu">
+        <li><a class="link_name">Thông tin</a></li>
+        <li><a routerLink="/dantoc">Dân tộc</a></li>
+        <li><a routerLink="/tongiao">Tôn giáo</a></li>
+      </ul>
+    </li>
+    <li>
+      <a>
+        <i class="bx bx-history"></i>
+        <span class="link_name">History</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name">History</a></li>
+      </ul>
+    </li>
+    <li>
+      <a>
+        <i class="bx bx-cog"></i>
+        <span class="link_name">Setting</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name">Setting</a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="profile-details">
+        <div class="profile-content">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            alt="profileImg"
+          />
         </div>
-
-        <ul class="sub-menu">
-          <li><a class="link_name">Quản lý</a></li>
-          <li><a routerLink="/taikhoan">Tài khoản</a></li>
-          <li><a routerLink="/donvi">Đơn vị</a></li>
-          <li><a routerLink="/phongban">Phòng ban</a></li>
-          <li><a routerLink="/chucvu">Vị trí/Chức vụ</a></li>
-          <li><a routerLink="/duan">Dự án</a></li>
-          <li><a routerLink="/hoso">Hồ sơ nhân viên</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a>
-            <i class="bx bx-book-alt"></i>
-            <span class="link_name">Quyết định</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
+        <div class="name-job">
+          <div class="profile_name"> {{showUserName()}}</div>
+          <div class="job">{{showUserPermision()}}</div>
         </div>
-        <ul class="sub-menu">
-          <li><a class="link_name">Quyết định</a></li>
-          <li><a routerLink="/khenthuong">Khen thưởng</a></li>
-          <li><a routerLink="/kyluat">Kỷ luật</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a>
-            <!--          <i class="bx bx-book-alt"></i>-->
-            <i class="fa-solid fa-synagogue"></i>
-            <!--&lt;!&ndash;          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-signpost-split" viewBox="0 0 16 16">&ndash;&gt;-->
-            <!--&lt;!&ndash;            <path d="M7 7V1.414a1 1 0 0 1 2 0V2h5a1 1 0 0 1 .8.4l.975 1.3a.5.5 0 0 1 0 .6L14.8 5.6a1 1 0 0 1-.8.4H9v10H7v-5H2a1 1 0 0 1-.8-.4L.225 9.3a.5.5 0 0 1 0-.6L1.2 7.4A1 1 0 0 1 2 7h5zm1 3V8H2l-.75 1L2 10h6zm0-5h6l.75-1L14 3H8v2z"/>&ndash;&gt;-->
-            <!--&lt;!&ndash;          </svg>&ndash;&gt;-->
-            <!--          <i class="bi bi-signpost-split"></i>-->
-            <span class="link_name">Thông tin</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name">Thông tin</a></li>
-          <li><a routerLink="/dantoc">Dân tộc</a></li>
-          <li><a routerLink="/tongiao">Tôn giáo</a></li>
-        </ul>
-      </li>
-      <li>
-        <a>
-          <i class="bx bx-history"></i>
-          <span class="link_name">History</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name">History</a></li>
-        </ul>
-      </li>
-      <li>
-        <a>
-          <i class="bx bx-cog"></i>
-          <span class="link_name">Setting</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name">Setting</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="profile-details">
-          <div class="profile-content">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-              alt="profileImg"
-            />
-          </div>
-          <div class="name-job">
-            <div class="profile_name">Prem Shahi</div>
-            <div class="job">Web Desginer</div>
-          </div>
+        <a href="/login">
           <i class="bx bx-log-out"></i>
-        </div>
-      </li>
-    </ul>
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>
+<section class="home-section">
+  <div class="home-content">
+    <i class="bx bx-menu"></i>
+    <span class="text"></span>
   </div>
-  <section class="home-section" [hidden]="hideSideBar()">
-    <div class="home-content" >
-      <i class="bx bx-menu"></i>
-      <span class="text"></span>
-    </div>
+  <div id="main">
     <router-outlet></router-outlet>
-  </section>
-  <div id="login-hide">
-  <app-login-admin></app-login-admin>
   </div>
+</section>
+<!--  <div id="login-hide">-->
+<!--  <app-login-admin></app-login-admin>-->
+<!--  </div>-->

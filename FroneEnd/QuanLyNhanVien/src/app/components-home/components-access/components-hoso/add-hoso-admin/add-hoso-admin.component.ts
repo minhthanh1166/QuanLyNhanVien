@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {DonVi} from "../../../../models/donvi";
 import {DanToc} from "../../../../models/dantoc";
 import {TonGiao} from "../../../../models/tongiao";
@@ -202,39 +202,39 @@ export class AddHosoAdminComponent {
   }
 
 
-
   // Khai báo một mảng rỗng để chứa tên các tỉnh thành
   provinces: string[] = [];
-  public getProvinces() : void {
+
+  public getProvinces(): void {
     // Gửi yêu cầu HTTP đến API
     const provincesJSON = '';
     fetch('../../assets/tinhthanh.json')
       .then(response => response.json())
       .then(data => {
-        for (let i=0; i<=100; i++) {
-          if(i < 10 && data[`0${i}`] !== undefined) {
+        for (let i = 0; i <= 100; i++) {
+          if (i < 10 && data[`0${i}`] !== undefined) {
             this.provinces.push(data[`0${i}`].name)
-          }
-          else if(data[i.toString()] !== undefined) {
+          } else if (data[i.toString()] !== undefined) {
             this.provinces.push(data[i.toString()].name)
           }
         }
       });
   }
 
-  fileUpload : any;
+  fileUpload: any;
   donViSelected: DonVi = new DonVi();
   phongBanSelected: PhongBan = new PhongBan();
   listPhongBan: PhongBan[] = [];
   gioiTinhSelected: any = '';
+
   customComparePB(o1: PhongBan, o2: PhongBan) {
-    if(o1 !== null && o2 !== null) {
+    if (o1 !== null && o2 !== null) {
       return o1.maPhongBan == o2.maPhongBan;
-    }
-    else {
+    } else {
       return false;
     }
   }
+
   private setDefaultDonViSelected() {
     this.phongBanService.listPhongBan().subscribe(
       {
@@ -251,19 +251,17 @@ export class AddHosoAdminComponent {
 
 
   customCompareDV(o1: DonVi, o2: DonVi) {
-    if(o1 !== null && o2 !== null) {
+    if (o1 !== null && o2 !== null) {
       return o1.maDonVi == o2.maDonVi;
-    }
-    else {
+    } else {
       return false;
     }
   }
 
   customCompareCV(o1: ChucVu, o2: ChucVu) {
-    if(o1 !== null && o2 !== null) {
+    if (o1 !== null && o2 !== null) {
       return o1.maChucDanh == o2.maChucDanh;
-    }
-    else {
+    } else {
       return false;
     }
   }

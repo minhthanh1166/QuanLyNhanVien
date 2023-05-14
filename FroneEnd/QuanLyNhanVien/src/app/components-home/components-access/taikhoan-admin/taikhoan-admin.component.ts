@@ -167,14 +167,14 @@ export class TaikhoanAdminComponent implements OnInit {
     }
   }
 
-  public displayTrangThai(q : number) : string {
-    if(q == 0) {
-      return 'Vô hiệu hoá'
-    }
-    else {
-      return 'Bình thường'
-    }
-  }
+  // public displayTrangThai(q : number) : string {
+  //   if(q == 0) {
+  //     return 'Vô hiệu hoá'
+  //   }
+  //   else {
+  //     return 'Bình thường'
+  //   }
+  // }
 
   public checkAlreadyUseAccount(tk : Taikhoan) : boolean {
     // @ts-ignore

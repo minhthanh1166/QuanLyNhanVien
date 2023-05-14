@@ -31,7 +31,9 @@ export class HomeAdminComponent implements OnInit {
     this.getTongSoDonVi();
     this.getTongSoPhongBan();
     this.getTongSoDuAn();
-    frmLogin.handleShowHide();
+    frmLogin.handleShowHide2();
+    frmLogin.handleShowHide()
+
   }
 
   ngOnInit(): void {

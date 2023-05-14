@@ -6,7 +6,7 @@ export class Taikhoan {
   soCmnd?: string;
   dienThoaiDiDong?: string;
   email?: string;
-  kichHoat: number = 1;
+  kichHoat: number = 0;
   quyen: number = 0;
   constructor() {
   }

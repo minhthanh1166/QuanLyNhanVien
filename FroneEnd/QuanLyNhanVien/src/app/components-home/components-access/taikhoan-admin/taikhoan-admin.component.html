@@ -55,7 +55,12 @@
             <td>{{ item.email }}</td>
             <td>{{ item.soCmnd }}</td>
             <td>{{ displayQuyen(item.quyen) }}</td>
-            <td>{{ displayTrangThai(item.kichHoat) }}</td>
+            <td *ngIf="item.kichHoat == 0">
+              <span style="padding: 10px; border-radius: 10px; background-color: #dc3545;font-weight: bold; color: white ">Vô hiệu hoá</span>
+            </td>
+            <td *ngIf="item.kichHoat == 1">
+              <span style="padding: 10px; border-radius: 10px; background-color: green;font-weight: bold; color: white ">Bình thường</span>
+            </td>
             <td>
 
                 <a
@@ -183,7 +188,7 @@
               required
             >
               <option value="1">Quản trị viên</option>
-              <option value="2">Cán bộ tổ chức</option>
+              <option value="2">Nhân viên quản lý</option>
               <option value="0" [selected]="true">Người dùng</option>
             </select>
           </div>
@@ -286,7 +291,7 @@
               name="quyen"
             >
               <option value="1">Quản trị viên</option>
-              <option value="2">Cán bộ tổ chức</option>
+              <option value="2">Nhân viên quản lý</option>
               <option value="0">Người dùng</option>
             </select>
           </div>

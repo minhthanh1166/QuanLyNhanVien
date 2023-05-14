@@ -110,10 +110,10 @@ export class ThongkeAdminComponent implements OnInit{
       if (hoSo.trinhDoChuyenMon == 'Junior Developer') {
         junior++;
       }
-      if (hoSo.trinhDoChuyenMon == 'Senior Devloper') {
+      if (hoSo.trinhDoChuyenMon == 'Senior Developer') {
         senior++;
       }
-      if (hoSo.trinhDoChuyenMon == 'Lead Devloper') {
+      if (hoSo.trinhDoChuyenMon == 'Lead Developer') {
         lead++;
       }
       if (hoSo.trinhDoChuyenMon == 'Mid-level Manager') {
