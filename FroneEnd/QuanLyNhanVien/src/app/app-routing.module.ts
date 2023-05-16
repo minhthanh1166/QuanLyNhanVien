@@ -25,6 +25,9 @@ import {
 } from "./components-home/components-access/component-duan/xemchitiet-admin/xemchitiet-admin.component";
 
 import { AuthGuard } from "./service/auth.guard"
+import {
+  TinhluongAdminComponent
+} from "./components-home/components-access/components-hoso/tinhluong-admin/tinhluong-admin.component";
 
 
 const routes: Routes = [
@@ -45,6 +48,7 @@ const routes: Routes = [
   { path: 'thongke', component: ThongkeAdminComponent,  canActivate: [AuthGuard] },
   { path: 'duan', component: DuanAdminComponent,  canActivate: [AuthGuard] },
   { path: 'xemchitiet-duan', component: XemchitietAdminComponent,  canActivate: [AuthGuard] },
+  { path: 'tinhluong', component: TinhluongAdminComponent,  canActivate: [AuthGuard] },
 ];
 
 @NgModule({

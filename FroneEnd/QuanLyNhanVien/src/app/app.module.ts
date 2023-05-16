@@ -29,6 +29,7 @@ import {LoginAdminComponent} from "./components-home/login-admin/login-admin.com
 import { ThongkeAdminComponent } from './components-home/components-access/thongke-admin/thongke-admin.component';
 import { DuanAdminComponent } from './components-home/components-access/component-duan/duan-admin/duan-admin.component';
 import { XemchitietAdminComponent } from './components-home/components-access/component-duan/xemchitiet-admin/xemchitiet-admin.component';
+import { TinhluongAdminComponent } from './components-home/components-access/components-hoso/tinhluong-admin/tinhluong-admin.component';
 // Pass the fusioncharts library and chart modules
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 @NgModule({
@@ -49,7 +50,8 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     LoginAdminComponent,
     ThongkeAdminComponent,
     DuanAdminComponent,
-    XemchitietAdminComponent
+    XemchitietAdminComponent,
+    TinhluongAdminComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import {interval, mapTo, Observable, scan, takeWhile} from "rxjs";
 import {DuanService} from "../../service/duan.service";
 import {LoginAdminComponent} from "../login-admin/login-admin.component";
 import {AppComponent} from "../../app.component";
+import {ChucVuService} from "../../service/chucvu.service";
 
 @Component({
   selector: 'app-home-admin',
@@ -23,14 +24,17 @@ export class HomeAdminComponent implements OnInit {
   countdown$: Observable<number> | undefined;
   countdown: number = 0 ;
   tongSoDuAn: any = 0;
+  tongChucVu: any = 0;
   constructor(private tkService: TaikhoanService, private hoSoService: HoSoService,
               private donViService: DonViService, private phongBanService: PhongBanService,
-              private duAnService: DuanService, private frmLogin: AppComponent) {
+              private duAnService: DuanService, private frmLogin: AppComponent,
+              private chucVuService: ChucVuService) {
     this.getTongSoTaiKhoan();
     this.getTongSoNhanVien();
     this.getTongSoDonVi();
     this.getTongSoPhongBan();
     this.getTongSoDuAn();
+    this.getTongSoChucVu();
     frmLogin.handleShowHide2();
     frmLogin.handleShowHide()
 
@@ -82,6 +86,16 @@ export class HomeAdminComponent implements OnInit {
       (data) => {
         for (const dataKey in data) {
           this.tongSoPhongBan++;
+        }
+      }
+    )
+  }
+
+  private getTongSoChucVu() {
+    this.chucVuService.listChucVu().subscribe(
+      (data) => {
+        for (const dataKey in data) {
+          this.tongChucVu++;
         }
       }
     )

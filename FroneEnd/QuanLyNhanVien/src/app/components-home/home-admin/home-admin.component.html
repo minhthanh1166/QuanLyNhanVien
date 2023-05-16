@@ -59,6 +59,18 @@
         <div class="box__item active-bg-purple-dark me-5">
           <div class="box__title">
             <span class="countdown" *ngIf="countdown$ | async as countdown">{{countdown}}</span>
+            <span class="countdown" *ngIf="countdown == 0">{{tongChucVu}}</span>
+            <p>Tổng số chức vụ</p>
+          </div>
+          <div class="box-icon">
+            <i class="fa-solid fa-network-wired"></i>
+          </div>
+        </div>
+
+
+        <div class="box__item active-bg-purple ">
+          <div class="box__title">
+            <span class="countdown" *ngIf="countdown$ | async as countdown">{{countdown}}</span>
             <span class="countdown" *ngIf="countdown == 0">{{tongSoDuAn}}</span>
             <p>Tổng số dự án</p>
           </div>
@@ -66,19 +78,7 @@
             <i class="fa-solid fa-diagram-project"></i>
           </div>
         </div>
-
-
-        <div class="box__item active-bg-purple ">
-          <div class="box__title">
-            <span>1200$</span>
-            <p>Doanh thu công ty</p>
-          </div>
-          <div class="box-icon">
-            <i class="fa-solid fa-money-bill"></i>
-          </div>
-        </div>
       </div>
-
 
     </div>
   </div>
