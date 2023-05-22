@@ -39,33 +39,44 @@
         <i class="bx bxs-chevron-down arrow"></i>
       </div>
 
-      <ul class="sub-menu">
+      <ul class="sub-menu" *ngIf="showUserPermision() === 'Nhân viên quản lý' || showUserPermision() === 'Quản trị viên'">
         <li><a class="link_name">Quản lý</a></li>
-        <li><a routerLink="/taikhoan">Tài khoản</a></li>
+        <li *ngIf="showUserPermision() === 'Nhân viên'"></li>
+        <li *ngIf="showUserPermision() === 'Nhân viên quản lý'"></li>
+        <li *ngIf="showUserPermision() === 'Quản trị viên'"><a routerLink="/taikhoan" >Tài khoản</a></li>
         <li><a routerLink="/donvi">Đơn vị</a></li>
         <li><a routerLink="/phongban">Phòng ban</a></li>
         <li><a routerLink="/chucvu">Vị trí/Chức vụ</a></li>
         <li><a routerLink="/duan">Dự án</a></li>
         <li><a routerLink="/hoso">Hồ sơ nhân viên</a></li>
       </ul>
+      <ul class="sub-menu" *ngIf="showUserPermision() === 'Nhân viên'">
+<!--        <li><a routerLink="/donvi">Đơn vị</a></li>-->
+<!--        <li><a routerLink="/phongban">Phòng ban</a></li>-->
+<!--        <li><a routerLink="/chucvu">Vị trí/Chức vụ</a></li>-->
+        <li><a routerLink="/duan">Dự án</a></li>
+        <li><a routerLink="/hoso">Hồ sơ nhân viên</a></li>
+      </ul>
     </li>
-    <li>
-      <div class="iocn-link">
+    <li >
+      <div class="iocn-link" >
         <a>
           <i class="bx bx-book-alt"></i>
           <span class="link_name">Quyết định</span>
         </a>
         <i class="bx bxs-chevron-down arrow"></i>
       </div>
-      <ul class="sub-menu">
+      <ul class="sub-menu" *ngIf="showUserPermision() === 'Nhân viên quản lý' || showUserPermision() === 'Quản trị viên'">
         <li><a class="link_name">Quyết định</a></li>
         <li><a routerLink="/khenthuong">Khen thưởng</a></li>
         <li><a routerLink="/kyluat">Kỷ luật</a></li>
       </ul>
     </li>
-    <li>
+    <li *ngIf="showUserPermision() === 'Nhân viên'">
+    </li>
+    <li >
       <div class="iocn-link">
-        <a>
+        <a >
           <!--          <i class="bx bx-book-alt"></i>-->
           <i class="fa-solid fa-synagogue"></i>
           <!--&lt;!&ndash;          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-signpost-split" viewBox="0 0 16 16">&ndash;&gt;-->
@@ -76,11 +87,13 @@
         </a>
         <i class="bx bxs-chevron-down arrow"></i>
       </div>
-      <ul class="sub-menu">
+      <ul class="sub-menu" *ngIf="showUserPermision() === 'Nhân viên quản lý' || showUserPermision() === 'Quản trị viên'">
         <li><a class="link_name">Thông tin</a></li>
         <li><a routerLink="/dantoc">Dân tộc</a></li>
         <li><a routerLink="/tongiao">Tôn giáo</a></li>
       </ul>
+    </li>
+    <li *ngIf="showUserPermision() === 'Nhân viên'">
     </li>
     <li>
       <a>

@@ -160,10 +160,10 @@ export class TaikhoanAdminComponent implements OnInit {
       return 'Quản trị viên'
     }
     else if(q == 2) {
-      return 'Cán bộ tổ chức'
+      return 'Nhân viên quản lý'
     }
     else {
-      return 'Người dùng'
+      return 'Nhân viên'
     }
   }
 

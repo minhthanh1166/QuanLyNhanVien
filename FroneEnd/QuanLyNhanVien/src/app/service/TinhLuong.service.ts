@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {TinhLuong} from "../models/TinhLuong";
 
+
 @Injectable({
   providedIn: "root"
 })
@@ -14,6 +15,18 @@ export class TinhLuongService {
 
   public listTinhLuong(): Observable<TinhLuong[]> {
     return this.http.get<TinhLuong[]>(`${this.apiServerUrl}/tinhluong/list`);
+  }
+
+  public listTinhLuongByHoSo(mahs : number): Observable<TinhLuong[]> {
+    return this.http.get<TinhLuong[]>(`${this.apiServerUrl}/tinhluong/list?mahs=${mahs}`);
+  }
+
+  public listTinhLuongByDonVi(madv : string): Observable<TinhLuong[]> {
+    return this.http.get<TinhLuong[]>(`${this.apiServerUrl}/tinhluong/list?madv=${madv}`);
+  }
+
+  public listTinhLuongByPhongBan(mapb : number): Observable<TinhLuong[]> {
+    return this.http.get<TinhLuong[]>(`${this.apiServerUrl}/tinhluong/list?mapb=${mapb}`);
   }
 
   public addTinhLuong(obj: TinhLuong): Observable<TinhLuong> {

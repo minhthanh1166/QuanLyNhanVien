@@ -1,11 +1,16 @@
 package com.bmt.qlnv.service;
 
+import com.bmt.qlnv.models.DonVi;
+import com.bmt.qlnv.models.HoSo;
+import com.bmt.qlnv.models.PhongBan;
 import com.bmt.qlnv.models.TinhLuong;
+import com.bmt.qlnv.repository.IDonViRepository;
+import com.bmt.qlnv.repository.IHoSoRepository;
+import com.bmt.qlnv.repository.IPhongBanRepository;
 import com.bmt.qlnv.repository.ITinhLuongReponsitory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -14,17 +19,38 @@ import java.util.List;
 public class TinhLuongService implements ITinhLuongService{
 
     private final ITinhLuongReponsitory iTinhLuongReponsitory;
+    private final IHoSoRepository iHoSoRepository;
+    private final IDonViRepository iDonViRepository;
+    private final IPhongBanRepository iPhongBanRepository;
 
     private static  LocalDate currentDate = LocalDate.now();
 
     @Autowired
-    public TinhLuongService(ITinhLuongReponsitory iTinhLuongReponsitory) {
+    public TinhLuongService(ITinhLuongReponsitory iTinhLuongReponsitory, IHoSoRepository iHoSoRepository, IDonViRepository iDonViRepository, IPhongBanRepository iPhongBanRepository) {
         this.iTinhLuongReponsitory = iTinhLuongReponsitory;
+        this.iHoSoRepository = iHoSoRepository;
+        this.iDonViRepository = iDonViRepository;
+        this.iPhongBanRepository = iPhongBanRepository;
     }
 
     @Override
     public List<TinhLuong> getAllTinhLuong() {
         return iTinhLuongReponsitory.findAll();
+    }
+
+    @Override
+    public List<TinhLuong> searchAllHoSoByName(HoSo maHoSo) {
+        return iTinhLuongReponsitory.findByHoso(maHoSo);
+    }
+
+    @Override
+    public List<TinhLuong> searchAllHoSoByDonVi(DonVi maDV) {
+        return iTinhLuongReponsitory.findHoSoByDonVi(maDV);
+    }
+
+    @Override
+    public List<TinhLuong> searchAllHoSoByPhongBan(PhongBan maPB) {
+        return iTinhLuongReponsitory.findHoSoByPhongBan(maPB);
     }
 
     @Override

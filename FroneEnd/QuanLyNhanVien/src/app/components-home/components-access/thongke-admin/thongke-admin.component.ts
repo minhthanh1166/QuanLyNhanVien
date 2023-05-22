@@ -5,25 +5,30 @@ import {formatDate} from "@angular/common";
 import {DuAn} from "../../../models/duan";
 import {DuanService} from "../../../service/duan.service";
 import * as $ from 'jquery';
+import {TinhLuongService} from "../../../service/TinhLuong.service";
+import {TinhLuong} from "../../../models/TinhLuong";
+
 @Component({
   selector: 'app-thongke-admin',
   templateUrl: './thongke-admin.component.html',
   styleUrls: ['./thongke-admin.component.css']
 })
-export class ThongkeAdminComponent implements OnInit{
+export class ThongkeAdminComponent implements OnInit {
   dataSource: Object | undefined;
   private dataTrinhDoChuyenMon: any;
   private listHoSo: HoSo[] = [];
 
   private listDuAn: DuAn[] = [];
+  private listLuong: TinhLuong[] = [];
   dataSourceLuong: any;
   private dataLuong: any;
   dataSourceNhanVienThang: any;
   private dataNVThang: any;
   dataSourceDuAn: any;
   private dataDuAnThang: any;
-  constructor(private hoSoSevice: HoSoService, private duAnService: DuanService) {
-   this.getListHoSo();
+
+  constructor(private hoSoSevice: HoSoService, private duAnService: DuanService, private luongService: TinhLuongService) {
+    this.getListHoSo();
     this.chartDataHoSo()
   }
 
@@ -32,6 +37,7 @@ export class ThongkeAdminComponent implements OnInit{
     this.getListHoSo();
     this.getListDuAn();
     this.handelJquery();
+    this.getListLuong();
   }
 
 
@@ -40,6 +46,7 @@ export class ThongkeAdminComponent implements OnInit{
       $('.raphael-group-209-caption').addClass('.active')
     });
   }
+
   public getListHoSo(): void {
     this.hoSoSevice.listHoSo().subscribe(
       {
@@ -49,8 +56,6 @@ export class ThongkeAdminComponent implements OnInit{
           // data trinh do chuyen mon
           this.setDataDSTrinhDoChuyenMon(res);
           this.chartDataHoSo();
-          this.setDataDSLuong(res);
-          this.chartDataLuong();
           this.setDataDSThang(res);
           this.chartDataThang();
         },
@@ -60,6 +65,22 @@ export class ThongkeAdminComponent implements OnInit{
       }
     )
   }
+
+  private getListLuong(): void {
+    this.luongService.listTinhLuong().subscribe(
+      {
+        next: (res) => {
+          this.listLuong = res;
+          this.setDataDSLuong(res);
+          this.chartDataLuong();
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      }
+    )
+  }
+
 
   public getListDuAn(): void {
     this.duAnService.listDuAn().subscribe(
@@ -120,7 +141,7 @@ export class ThongkeAdminComponent implements OnInit{
         midLevel++;
       }
       if (hoSo.trinhDoChuyenMon == 'Senior Leader') {
-        seniorLeader ++;
+        seniorLeader++;
       }
     }
     this.dataTrinhDoChuyenMon = [
@@ -152,7 +173,7 @@ export class ThongkeAdminComponent implements OnInit{
   }
 
 
-  private setDataDSLuong(res: HoSo[]) {
+  private setDataDSLuong(res: TinhLuong[]) {
     let duoi5tr = 0;
     let tu5trDen10tr = 0;
     let tu10Den15tr = 0;
@@ -160,24 +181,19 @@ export class ThongkeAdminComponent implements OnInit{
     let tu30trDen50tr = 0;
     let tren50tr = 0;
 
-    for (let hoSo of res) {
-      if (hoSo.luong < 5000000) {
+    for (let tinhLuong of res) {
+      if (tinhLuong.luongChinhThuc < 5000000) {
         duoi5tr++;
-      }
-      else if (hoSo.luong <= 10000000) {
+      } else if (tinhLuong.luongChinhThuc <= 10000000) {
         tu5trDen10tr++;
-      }
-      else if (hoSo.luong <= 15000000) {
+      } else if (tinhLuong.luongChinhThuc <= 15000000) {
         tu10Den15tr++;
-      }
-      else if (hoSo.luong <= 30000000) {
+      } else if (tinhLuong.luongChinhThuc <= 30000000) {
         tu15Den30tr++;
-      }
-      else if (hoSo.luong <= 50000000) {
+      } else if (tinhLuong.luongChinhThuc <= 50000000) {
         tu30trDen50tr++;
-      }
-      else {
-        tren50tr ++;
+      } else {
+        tren50tr++;
       }
     }
     this.dataLuong = [
@@ -230,20 +246,17 @@ export class ThongkeAdminComponent implements OnInit{
     let quy2 = 0;
     let quy3 = 0;
     let quy4 = 0;
-    let monthOfHoSo : any;
+    let monthOfHoSo: any;
     for (let hoSo of res) {
       monthOfHoSo = parseInt(formatDate(hoSo.ngayLapHoSo, 'M', 'en-US').toString());
       console.log('Tháng: ' + monthOfHoSo);
       if (monthOfHoSo >= 1 && monthOfHoSo <= 3) {
         quy1++;
-      }
-      else if (monthOfHoSo > 3 && monthOfHoSo <= 6) {
+      } else if (monthOfHoSo > 3 && monthOfHoSo <= 6) {
         quy2++;
-      }
-      else if (monthOfHoSo > 6 && monthOfHoSo <= 9) {
+      } else if (monthOfHoSo > 6 && monthOfHoSo <= 9) {
         quy3++;
-      }
-      else if (monthOfHoSo > 9 && monthOfHoSo <= 12) {
+      } else if (monthOfHoSo > 9 && monthOfHoSo <= 12) {
         quy4++;
       }
     }
@@ -306,20 +319,17 @@ export class ThongkeAdminComponent implements OnInit{
     let quy2 = 0;
     let quy3 = 0;
     let quy4 = 0;
-    let monthOfHoSo : any;
+    let monthOfHoSo: any;
     for (let duAn of res) {
       monthOfHoSo = parseInt(formatDate(duAn.ngayLapHoSoDuAn, 'M', 'en-US').toString());
       console.log('Tháng: ' + monthOfHoSo);
       if (monthOfHoSo >= 1 && monthOfHoSo <= 3) {
         quy1++;
-      }
-      else if (monthOfHoSo > 3 && monthOfHoSo <= 6) {
+      } else if (monthOfHoSo > 3 && monthOfHoSo <= 6) {
         quy2++;
-      }
-      else if (monthOfHoSo > 6 && monthOfHoSo <= 9) {
+      } else if (monthOfHoSo > 6 && monthOfHoSo <= 9) {
         quy3++;
-      }
-      else if (monthOfHoSo > 9 && monthOfHoSo <= 12) {
+      } else if (monthOfHoSo > 9 && monthOfHoSo <= 12) {
         quy4++;
       }
     }

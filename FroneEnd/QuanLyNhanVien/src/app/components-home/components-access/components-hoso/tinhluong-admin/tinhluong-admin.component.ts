@@ -13,6 +13,7 @@ import {PhongBan} from "../../../../models/phongban";
 import {DonViService} from "../../../../service/donvi.service";
 import {DuAn} from "../../../../models/duan";
 import {DanToc} from "../../../../models/dantoc";
+import {AppComponent} from "../../../../app.component";
 
 
 @Component({
@@ -29,6 +30,7 @@ export class TinhluongAdminComponent {
   hoSoNhanVienSelected: HoSo = new HoSo();
   donViSelected: DonVi = new DonVi();
 
+  public loadHoSo: HoSo = new HoSo();
   tl: TinhLuong = new TinhLuong();
 
   hs: HoSo = new HoSo();
@@ -42,13 +44,15 @@ export class TinhluongAdminComponent {
   formattedAmount: String = '';
 
   constructor(private theService: TinhLuongService, private hoSoService: HoSoService, private router: Router,
-              private pbService: PhongBanService, private dvService: DonViService, private phongBanService: PhongBanService) {
+              private pbService: PhongBanService, private dvService: DonViService, private phongBanService: PhongBanService,
+              public frmApp : AppComponent) {
   }
 
   ngOnInit(): void {
     this.getListTinhLuong();
     this.getListHoSo();
     this.getListDonVi();
+    this.setDefaultDonViSelected();
   }
 
   public getListDonVi(): void {
@@ -114,9 +118,9 @@ export class TinhluongAdminComponent {
 
   loadHoSoNhanVien(hoSoSelected: HoSo) {
     console.log(hoSoSelected);
-    this.hoSoService.listHoSoByName(hoSoSelected.hoVaTen).subscribe({
+    this.theService.listTinhLuongByHoSo(hoSoSelected.idHoSo).subscribe({
       next: data => {
-        this.listHoSo = data;
+        this.listTinhLuong = data;
       },
       error: ers => {
       }
@@ -286,5 +290,18 @@ export class TinhluongAdminComponent {
         console.log(err)
       }
     });
+  }
+  private setDefaultDonViSelected() {
+    this.phongBanService.listPhongBan().subscribe(
+      {
+        next: (res) => {
+          this.listPhongBan = res;
+
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      }
+    )
   }
 }

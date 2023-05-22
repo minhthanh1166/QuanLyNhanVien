@@ -309,7 +309,8 @@
           <tr>
             <td colspan="4" align="center">
               <button class="btn btn-success mt-5 mb-3 ms-3" [disabled]="editForm.invalid"
-                      (click)="onUpdate(editForm.value)">
+                      (click)="onUpdate(editForm.value)"
+                      *ngIf="frmApp.showUserPermision() !== 'Nhân viên'">
                 <i class="fa-solid fa-floppy-disk"></i>
                 Lưu lại
               </button>

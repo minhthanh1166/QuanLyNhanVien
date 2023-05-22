@@ -11,6 +11,7 @@ import {DanToc} from "../../../../models/dantoc";
 import {TonGiao} from "../../../../models/tongiao";
 import {ChucVu} from "../../../../models/chucvu";
 import {DomSanitizer} from "@angular/platform-browser";
+import {AppComponent} from "../../../../app.component";
 
 @Component({
   selector: 'app-edit-hoso-admim',
@@ -53,7 +54,7 @@ export class EditHosoAdmimComponent implements OnInit{
   constructor(private theService: HoSoService, private route: ActivatedRoute,
               private DVService: DonViService, private phongBanService: PhongBanService,
               private chucVuService: ChucVuService, private sanitizer: DomSanitizer,
-              private router: Router) {
+              private router: Router, public frmApp: AppComponent) {
   }
 
 

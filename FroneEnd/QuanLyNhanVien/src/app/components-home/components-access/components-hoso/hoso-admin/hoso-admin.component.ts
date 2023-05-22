@@ -17,6 +17,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {FormControl, FormGroup, NgForm} from "@angular/forms";
 import {DuAn} from "../../../../models/duan";
 import {DuanService} from "../../../../service/duan.service";
+import {AppComponent} from "../../../../app.component";
 
 @Component({
   selector: 'app-hoso-admin',
@@ -46,7 +47,7 @@ export class HosoAdminComponent {
   constructor(private theService: HoSoService, private dvService: DonViService, private router: Router,
               private cvService: ChucVuService, private pbService: PhongBanService, private duAnService: DuanService,
               private qdktService: HinhThucKhenThuongService, private quaTrinhDTBDService: QuaTrinhDaoTaoBoiDuongService,
-              private qdklService: HinhThucKyLuatService) {
+              private qdklService: HinhThucKyLuatService, public frmApp : AppComponent) {
   }
 
   ngOnInit(): void {

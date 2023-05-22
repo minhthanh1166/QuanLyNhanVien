@@ -41,6 +41,9 @@ export class AppComponent implements OnInit{
     console.log(this.location.path());
     this.handleShowHide();
     this.handleShowHide2()
+    this.showUserPermision();
+
+
   }
 
 
@@ -51,9 +54,10 @@ export class AppComponent implements OnInit{
         $(".home-section").css("background-color", "#fff");
         $(".home-content").css("display", "none");
       });
-
     }
   }
+
+
 
 
 
@@ -73,15 +77,17 @@ export class AppComponent implements OnInit{
       return !window.localStorage.getItem('token')
   }
 
-  showUserName() : string {
+  public showUserName() : string {
     return (window.localStorage.getItem('token') || '').toString();
   }
-  showUserPermision() : string {
+  public showUserPermision() : string {
     let quyen =  parseInt((window.localStorage.getItem('pquyen') || '').toString());
     if(quyen === 1) {
       return 'Quản trị viên'
     }
     else if(quyen === 2) {
+      return 'Nhân viên quản lý';
+    }else if(quyen === 3) {
       return 'Nhân viên';
     }
     else {

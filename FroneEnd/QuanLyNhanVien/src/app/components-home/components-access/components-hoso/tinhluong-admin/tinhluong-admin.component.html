@@ -11,9 +11,10 @@
     </a>
 
     <div class="container mt-5 w-50" id="main-container">
-      <div class="d-flex">
+      <div class="d-flex mb-3">
         <a
-          class="btn btn-outline-success mb-3 text-decoration-none"
+          *ngIf="frmApp.showUserPermision() !== 'Nhân viên'"
+          class="btn btn-outline-success text-decoration-none me-2"
           id="add-btn-open-modal"
           style="height: 36px;"
           (click)="onOpenModalAdd('add')">
@@ -21,7 +22,7 @@
           Thêm
         </a>
         <a
-          class="btn  me-2 btn-outline-secondary text-decoration-none ms-2"
+          class="btn  me-2 btn-outline-secondary text-decoration-none"
           style="height: 36px"
           id="x-btn-open-x"
           href="/tinhluong">
@@ -71,7 +72,8 @@
           <th>Hệ số lương</th>
           <th>Số ngày đi làm</th>
           <th>Mức lương (VND)</th>
-          <th>Lựa chọn</th>
+          <th *ngIf="frmApp.showUserPermision() === 'Nhân viên'"></th>
+          <th *ngIf="frmApp.showUserPermision() !== 'Nhân viên'">Tuỳ chọn</th>
         </tr>
         </thead>
         <tbody>
@@ -86,11 +88,13 @@
             <div class="float-right btn-group btn-group-sm">
               <a class="btn btn-sm btn-warning tooltips" data-placement="top" data-toggle="tooltip"
                  (click)="onOpenEditOrDeleteModal(item, 'edit')"
+                 *ngIf="frmApp.showUserPermision() !== 'Nhân viên'"
               >
                 <i class="fa-solid fa-pen-to-square me-1"></i>
               </a>
               <a class="btn btn-sm btn-danger tooltips" data-placement="top" data-toggle="tooltip"
                  (click)="onOpenEditOrDeleteModal(item, 'delete')"
+                 *ngIf="frmApp.showUserPermision() !== 'Nhân viên'"
               >
                 <i class="fa-solid fa-eraser me-1"></i>
               </a>
@@ -295,7 +299,6 @@
             [(ngModel)]="editTinhLuong.phongBan"
             name="phongBan"
             class="form-select mb-3"
-            (change)="loadHoSoByPhongBan(editTinhLuong.phongBan)"
             [compareWith]="customComparePB">
             <option *ngFor="let item of listPhongBan" [ngValue]="item">
               {{ item.tenPhongBan }}
@@ -416,7 +419,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Bạn muốn xoá dân tộc {{ deleteTinhLuong.hoso.hoVaTen }} không?
+        Bạn muốn xoá mức lương của {{ deleteTinhLuong.hoso.hoVaTen }} không?
       </div>
       <div class="modal-footer">
         <button

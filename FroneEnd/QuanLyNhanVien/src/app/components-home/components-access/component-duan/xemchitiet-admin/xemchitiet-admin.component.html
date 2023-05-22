@@ -43,7 +43,8 @@
           <th>Đơn vị</th>
           <th>Phòng ban</th>
           <th>Vị trí</th>
-          <th>Lựa chọn</th>
+          <th *ngIf="frmApp.showUserPermision() === 'Nhân viên'"></th>
+          <th *ngIf="frmApp.showUserPermision() !== 'Nhân viên'">Lựa chọn</th>
         </tr>
         </thead>
 
@@ -77,6 +78,7 @@
           </td>
           <td>
             <a
+              *ngIf="frmApp.showUserPermision() !== 'Nhân viên'"
               class="btn btn-sm btn-danger tooltips mb-1"
               data-placement="top"
               data-toggle="tooltip" (click)="onOpenEditOrDeleteModal( item, 'delete')"

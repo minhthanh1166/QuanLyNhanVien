@@ -3,6 +3,7 @@ import {DuAn} from "../../../../models/duan";
 import {HttpErrorResponse} from "@angular/common/http";
 import {DuanService} from "../../../../service/duan.service";
 import {HoSoService} from "../../../../service/hoso.service";
+import {AppComponent} from "../../../../app.component";
 
 @Component({
   selector: 'app-xemchitiet-admin',
@@ -17,7 +18,8 @@ export class XemchitietAdminComponent implements OnInit {
   public deleteDuAn: DuAn = new DuAn();
   public keyId: number = 0;
 
-  constructor(private theService: DuanService, private nhanVienService: HoSoService) {
+  constructor(private theService: DuanService, private nhanVienService: HoSoService,
+              public frmApp :AppComponent) {
   }
 
   ngOnInit(): void {

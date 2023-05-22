@@ -4,9 +4,10 @@
   </div>
   <div class="card-body">
     <div class="container mt-5 w-50" id="main-container">
-      <div class="d-flex">
+      <div class="d-flex mb-3">
         <a
-          class="btn btn-outline-success mb-3 text-decoration-none"
+          *ngIf="frmApp.showUserPermision() !== 'Nhân viên'"
+          class="btn btn-outline-success text-decoration-none me-2"
           id="add-btn-open-modal"
           (click)="onOpenModalAdd('add')"
           style="height: 36px;">
@@ -14,13 +15,13 @@
           Thêm
         </a>
         <a
-          class="btn  me-2 btn-outline-success text-decoration-none ms-2"
+          class="btn  btn-outline-success text-decoration-none"
           style="height: 36px"
           href="/xemchitiet-duan">
           <i class="fa-solid fa-clipboard-list"></i>
           Xem DSNV DA
         </a> <a
-        class="btn  me-2 btn-outline-secondary text-decoration-none ms-2"
+        class="btn btn-outline-secondary text-decoration-none ms-2"
         style="height: 36px"
         id="x-btn-open-x"
         href="/duan">
@@ -37,7 +38,8 @@
           <th>Ngày tiến hành làm</th>
           <th>Ngày kết thúc</th>
           <th>Trạng thái</th>
-          <th>Tuỳ chọn</th>
+          <th *ngIf="frmApp.showUserPermision() === 'Nhân viên'"></th>
+          <th *ngIf="frmApp.showUserPermision() !== 'Nhân viên'">Tuỳ chọn</th>
         </tr>
         </thead>
 
@@ -74,7 +76,7 @@
             <span style="padding: 10px; border-radius: 10px; background-color: blue;font-weight: bold; color: white ">Hoàn thành</span>
           </td>
           <td>
-            <div class="float-right btn-group btn-group-sm">
+            <div class="float-right btn-group btn-group-sm" *ngIf="frmApp.showUserPermision() !== 'Nhân viên'">
               <a
                 class="btn btn-sm btn-warning tooltips"
                 data-placement="top"

@@ -3,6 +3,7 @@ import {DuAn} from "../../../../models/duan";
 import {DuanService} from "../../../../service/duan.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
+import {AppComponent} from "../../../../app.component";
 
 
 @Component({
@@ -22,7 +23,7 @@ export class DuanAdminComponent implements OnInit{
   p: number = 1;
   setValueTrangThai: number = 0;
 
-  constructor(private theService: DuanService) {
+  constructor(private theService: DuanService, public frmApp : AppComponent) {
   }
 
   ngOnInit(): void {
