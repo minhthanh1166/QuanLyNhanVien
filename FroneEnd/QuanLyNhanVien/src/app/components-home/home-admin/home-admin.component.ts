@@ -25,6 +25,7 @@ export class HomeAdminComponent implements OnInit {
   countdown: number = 0 ;
   tongSoDuAn: any = 0;
   tongChucVu: any = 0;
+
   constructor(private tkService: TaikhoanService, private hoSoService: HoSoService,
               private donViService: DonViService, private phongBanService: PhongBanService,
               private duAnService: DuanService, private frmLogin: AppComponent,
@@ -46,8 +47,14 @@ export class HomeAdminComponent implements OnInit {
       scan((acc, curr) => acc + curr, 200),
       takeWhile(value => value >= 0)
     );
+    this.disableBackButton();
   }
-
+  disableBackButton(): void {
+    window.history.pushState(null, '', window.location.href);
+    window.onpopstate = function () {
+      window.history.pushState(null, '', window.location.href);
+    };
+  }
 
 
 
