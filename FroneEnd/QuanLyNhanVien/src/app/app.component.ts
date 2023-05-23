@@ -42,8 +42,6 @@ export class AppComponent implements OnInit{
     this.handleShowHide();
     this.handleShowHide2()
     this.showUserPermision();
-
-
   }
 
 

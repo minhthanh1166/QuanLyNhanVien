@@ -269,3 +269,7 @@
     left: 0;
   }
 }
+
+.no-click {
+  pointer-events: none;
+}

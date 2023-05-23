@@ -21,7 +21,9 @@
               <input type="file" [(ngModel)]="imagePath"
                      class="form-control"
                      [accept]="'image/jpeg'"
-                     name="imagePath" (change)="onChangeImage($event)">
+                     name="imagePath" (change)="onChangeImage($event)"
+                     [hidden]="frmApp.showUserPermision() === 'Nhân viên'"
+              >
             </td>
           </tr>
           <tr>

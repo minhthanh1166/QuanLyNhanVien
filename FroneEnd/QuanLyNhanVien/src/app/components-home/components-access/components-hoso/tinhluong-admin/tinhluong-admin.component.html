@@ -10,7 +10,7 @@
       Quay lại
     </a>
 
-    <div class="container mt-5 w-50" id="main-container">
+    <div class="container mt-5 w-75" id="main-container">
       <div class="d-flex mb-3">
         <a
           *ngIf="frmApp.showUserPermision() !== 'Nhân viên'"
@@ -69,6 +69,8 @@
         <tr>
           <th>Số hiệu nhân viên</th>
           <th>Họ và tên</th>
+          <th>Đơn vị</th>
+          <th>Phòng ban</th>
           <th>Hệ số lương</th>
           <th>Số ngày đi làm</th>
           <th>Mức lương (VND)</th>
@@ -81,6 +83,8 @@
     | paginate: { id: 'pagi-0', itemsPerPage: 5, currentPage: p, totalItems: listTinhLuong.length }">
           <td>{{item.hoso.soHieuNhanVien}}</td>
           <td>{{item.hoso.hoVaTen}}
+          <td>{{item.donVi.tenDonVi}}</td>
+          <td>{{item.phongBan.tenPhongBan}}</td>
           <td>{{item.heSoLuong}}</td>
           <td>{{item.soNgayDiLam}}</td>
           <td>{{getLuong(item)}}</td>
