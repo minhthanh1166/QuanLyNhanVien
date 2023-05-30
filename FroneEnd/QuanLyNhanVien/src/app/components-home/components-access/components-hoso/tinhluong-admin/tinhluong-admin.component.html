@@ -313,7 +313,7 @@
 
           <label class="form-label">Tên nhân viên</label>
           <select
-            [(ngModel)]="editTinhLuong.hoso"
+            [(ngModel)]="hoSoNhanVienSelected"
             name="hoso"
             class="form-select mb-3"
             [compareWith]="customCompareNV">
@@ -321,7 +321,7 @@
               {{ item.hoVaTen }}
             </option>
           </select>
-          <input type="hidden"  [ngModel]="phongBanSelected" name="hoso">
+          <input type="hidden"  [ngModel]="editTinhLuong.hoso" name="hoso">
           <div class="mb-3">
             <label class="form-label">Phụ cấp</label>
             <input
