@@ -10,7 +10,7 @@
       Quay lại
     </a>
 
-    <div class="container mt-5 w-75" id="main-container">
+    <div class="container mt-5 w-100" id="main-container">
       <div class="d-flex mb-3">
         <a
           *ngIf="frmApp.showUserPermision() !== 'Nhân viên'"
@@ -287,22 +287,23 @@
           <!--         Start-->
           <label class="form-label">Đơn vị</label>
           <select
-            [(ngModel)]="editTinhLuong.donVi"
+            [(ngModel)]="donViSelected"
             name="donVi"
             class="form-select mb-3"
-            (change)="getListPhongBan(editTinhLuong.donVi)"
+            (change)="onChangeDonVi(donViSelected)"
             [compareWith]="customCompareDV">
             <option *ngFor="let item of listDonVi" [ngValue]="item">
               {{ item.tenDonVi }}
             </option>
           </select>
-          <input type="hidden" [ngModel]="donViSelected" name="donVi">
+          <input type="hidden" [ngModel]="editTinhLuong.donVi" name="donVi">
 
           <label class="form-label">Phòng ban</label>
           <select
-            [(ngModel)]="editTinhLuong.phongBan"
+            [(ngModel)]="phongBanSelected"
             name="phongBan"
             class="form-select mb-3"
+            (change)="loadHoSoByPhongBan(phongBanSelected)"
             [compareWith]="customComparePB">
             <option *ngFor="let item of listPhongBan" [ngValue]="item">
               {{ item.tenPhongBan }}

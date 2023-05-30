@@ -3,7 +3,7 @@
     <h2>Danh sách các dự án</h2>
   </div>
   <div class="card-body">
-    <div class="container mt-5 w-75" id="main-container">
+    <div class="container mt-5 w-100" id="main-container">
       <div class="d-flex mb-3">
         <a
           *ngIf="frmApp.showUserPermision() !== 'Nhân viên'"
@@ -17,7 +17,7 @@
         <a
           class="btn  btn-outline-success text-decoration-none"
           style="height: 36px"
-          href="/xemchitiet-duan">
+          routerLink="/xemchitiet-duan">
           <i class="fa-solid fa-clipboard-list"></i>
           Xem DSNV DA
         </a> <a
