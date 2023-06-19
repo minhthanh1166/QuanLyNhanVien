@@ -82,5 +82,4 @@ public class HoSo implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date ngayLapHoSo;
 
-
 }
