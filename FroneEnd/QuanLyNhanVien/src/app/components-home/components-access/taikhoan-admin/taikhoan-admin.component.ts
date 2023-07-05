@@ -16,6 +16,7 @@ export class TaikhoanAdminComponent implements OnInit {
   public editTaikhoan: Taikhoan = new Taikhoan();
   public deleteTaikhoan: Taikhoan | undefined;
   public keyId: number = 0;
+  p: number = 0;
 
   protected ten: string = '';
 

@@ -1,9 +1,8 @@
 
 
 #section {
-  /*background: #e4e9f7;*/
-  /*width: 100%;*/
-  /*height: 100%;*/
+  background: #e4e9f7;
+  height: 100vh;
 }
 
 .active-bg-purple-dark {

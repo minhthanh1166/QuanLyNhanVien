@@ -65,6 +65,8 @@ public class TaiKhoanService {
     public TaiKhoan updateQandTT(int id, TaiKhoan tk) {
         TaiKhoan edit = taiKhoanRepository.findTaiKhoanById(id);
         if (edit != null) {
+            edit.setTenDangNhap(tk.getTenDangNhap());
+
             edit.setQuyen(tk.getQuyen());
             edit.setKichHoat(tk.getKichHoat());
             return taiKhoanRepository.save(edit);

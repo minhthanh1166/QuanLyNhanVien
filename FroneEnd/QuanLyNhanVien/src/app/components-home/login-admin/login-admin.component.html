@@ -1,15 +1,17 @@
-<div style="width: 464px; height: 430px; position:absolute;
-  top: 35%; left: 48%; transform: translate(-52%, -50%);
-   padding: 40px 25px; background-color: #e7e7e7; border-radius: 20px;
-  z-index: 1000">
+<div style="width: 464px; height: 430px; position:fixed;
+  top: 45%; left: 50%; transform: translate(-50%, -55%);
+   padding: 40px 25px; background-color: #fff; border-radius: 20px;
+  z-index: 1000;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+">
   <form class="form-signin " [formGroup]="loginForm" (ngSubmit)="login()">
-<!--        <img class="mb-4 d-block mx-auto" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
+    <!--        <img class="mb-4 d-block mx-auto" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
     <div style="position:relative;">
       <h2 class="text-center">Haravan - Đăng nhập</h2>
-<!--      <div style="position:absolute; top: 40px; left: 50% ;width: 80px;height: 5px ;background: black"></div>-->
+      <!--      <div style="position:absolute; top: 40px; left: 50% ;width: 80px;height: 5px ;background: black"></div>-->
     </div>
     <p class="text-center ">Xin chào, vui lòng nhập thông tin đăng nhập</p>
-     <h3 class="text-center mb-5">oceantech</h3>
+    <h3 class="text-center mb-5">oceantech</h3>
     <input type="text" name="username" class="form-control mb-2" placeholder="Tên đăng nhập"
            formControlName="username" required autofocus>
     <input type="password" name="password" class="form-control mb-4" placeholder="Mật khẩu" formControlName="password"

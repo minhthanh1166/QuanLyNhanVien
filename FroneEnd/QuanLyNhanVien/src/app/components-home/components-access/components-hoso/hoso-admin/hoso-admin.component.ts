@@ -18,6 +18,8 @@ import {FormControl, FormGroup, NgForm} from "@angular/forms";
 import {DuAn} from "../../../../models/duan";
 import {DuanService} from "../../../../service/duan.service";
 import {AppComponent} from "../../../../app.component";
+import {TaikhoanService} from "../../../../service/taikhoan.service";
+import {Taikhoan} from "../../../../models/taikhoan";
 
 @Component({
   selector: 'app-hoso-admin',
@@ -26,12 +28,14 @@ import {AppComponent} from "../../../../app.component";
 })
 export class HosoAdminComponent {
   public listHoSo: HoSo[] = [];
+  public listTK: Taikhoan[] = [];
   public listDonVi: DonVi[] = [];
   public editQD: HoSo = new HoSo();
   public deleteHoSo: HoSo | undefined;
   public keyId: number = 0;
   public htKhenThuongList: HinhThucKhenThuong[] = [];
   public htKyLuatList: HinhThucKyLuat[] = [];
+  public checkTKHS: HoSo[] = [];
 
   protected ten: string = '';
   maDV: string = 'DVOceanTech10';
@@ -44,10 +48,13 @@ export class HosoAdminComponent {
   tenQuyetDinhGenerate: string = '';
   listPhongBan: PhongBan[] = [];
 
+  matchedUsers: HoSo[] = [];
+
   constructor(private theService: HoSoService, private dvService: DonViService, private router: Router,
               private cvService: ChucVuService, private pbService: PhongBanService, private duAnService: DuanService,
               private qdktService: HinhThucKhenThuongService, private quaTrinhDTBDService: QuaTrinhDaoTaoBoiDuongService,
-              private qdklService: HinhThucKyLuatService, public frmApp : AppComponent) {
+              private qdklService: HinhThucKyLuatService, public frmApp: AppComponent,
+              private tkService: TaikhoanService) {
   }
 
   ngOnInit(): void {
@@ -57,7 +64,50 @@ export class HosoAdminComponent {
     this.setDefaultDonViSelected();
     this.getListHoSo();
     this.getDuAn();
+    this.getListTaiKhoan();
+    this.checkUserHSTK();
     console.log("List" + this.editQD.donVi.tenDonVi)
+  }
+
+  public checkUserHSTK(): void {
+    if (this.frmApp.showUserPermision() === "Nhân viên") {
+      this.theService.listHoSo().subscribe(
+        (res: HoSo[]) => {
+          this.matchedUsers = this.listHoSo.filter((hoSo) =>
+            this.listTK.find((taiKhoan) => taiKhoan.soCmnd === hoSo.soCmnd &&
+              window.localStorage.getItem('token') === taiKhoan.tenDangNhap));
+        },
+        (err: HttpErrorResponse) => {
+          alert(err.statusText);
+        }
+      );
+    } else {
+      this.theService.listHoSo().subscribe(
+        {
+          next: (res: HoSo[]) => {
+            this.matchedUsers = res;
+          },
+          error: (err: HttpErrorResponse) => {
+            alert(err.statusText);
+          }
+        }
+      );
+    }
+  }
+
+
+
+  public getListTaiKhoan(): void {
+    this.tkService.listTaiKhoan().subscribe(
+      {
+        next: (res: Taikhoan[]) => {
+          this.listTK = res;
+        },
+        error: (err: HttpErrorResponse) => {
+          alert(err.statusText);
+        }
+      }
+    )
   }
 
 
@@ -477,6 +527,7 @@ export class HosoAdminComponent {
   }
 
   nhanVienArr: HoSo[] = [];
+
   onAddQDLDG(addDGForm: NgForm) {
     for (let idhoSoItem of this.checkedValues) {
       this.theService.getHoSo(idhoSoItem).subscribe({
@@ -591,6 +642,6 @@ export class HosoAdminComponent {
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
     // @ts-ignore
     this.alertHold(alertPlaceholder, "Đã thêm vào dự án!", "success");
-    }
+  }
 }
 

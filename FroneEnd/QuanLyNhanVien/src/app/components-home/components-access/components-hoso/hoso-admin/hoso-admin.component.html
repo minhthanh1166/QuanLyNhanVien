@@ -75,7 +75,7 @@
         />
       </section>
 
-      <div id="search-form" class="mb-3 d-flex">
+      <div id="search-form" class="mb-3 d-flex" *ngIf="frmApp.showUserPermision() !== 'Nhân viên'">
         <select
           [(ngModel)]="donViSelected"
           name="DonVi"
@@ -141,13 +141,13 @@
         <tbody>
         <tr
           *ngFor="
-              let item of listHoSo
+              let item of matchedUsers
                 | paginate
                   : {
                       id: 'pagination',
                       itemsPerPage: 5,
                       currentPage: p,
-                      totalItems: listHoSo.length
+                      totalItems: checkTKHS.length
                     }">
           <td colspan="1">
             <input

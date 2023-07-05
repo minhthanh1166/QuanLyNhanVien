@@ -80,7 +80,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let item of listTinhLuong
-    | paginate: { id: 'pagi-0', itemsPerPage: 5, currentPage: p, totalItems: listTinhLuong.length }">
+    | paginate: { id: 'pagination', itemsPerPage: 5, currentPage: p, totalItems: listTinhLuong.length }">
           <td>{{item.hoso.soHieuNhanVien}}</td>
           <td>{{item.hoso.hoVaTen}}
           <td>{{item.donVi.tenDonVi}}</td>

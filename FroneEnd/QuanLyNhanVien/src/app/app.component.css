@@ -221,8 +221,6 @@
 }
 .home-section {
   position: relative;
-  background: #e4e9f7;
-  height: 100vh;
   left: 260px;
   width: calc(100% - 260px);
   transition: all 0.5s ease;
@@ -273,3 +271,14 @@
 .no-click {
   pointer-events: none;
 }
+
+
+.content {
+  background: #e4e9f7;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000 !important;
+}
+
+
